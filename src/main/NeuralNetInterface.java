@@ -1,14 +1,23 @@
 package main;
 
-public interface NeuralNetInterface extends CommonInterface{
+import java.io.IOException;
+import java.util.List;
+
+public interface NeuralNetInterface {
 
     final double bias = 1.0; // The input for each neurons bias weight
 
-    public double sigmoid(double x);
+    double sigmoid(double x);
 
-    public double customSigmoid(double x);
+    double customSigmoid(double x);
 
-    public void initializeWeights();
+    void initializeWeights();
 
-    public void zeroWeights();
+    void train(int epochNum);
+
+    void save(List<Double> listOfErrors) throws IOException;
+
+    double[][] feedForward();
+
+    void backPropagation(double[] outputsHidden, double[] outputs);
 }
