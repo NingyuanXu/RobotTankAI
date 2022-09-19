@@ -153,11 +153,12 @@ public class NeuralNet implements NeuralNetInterface {
     }
 
     @Override
-    public void train(int epochNum) {
+    public int train(int epochNum) {
         double trainingError;
         List<Double> listOfErrors = new ArrayList<>();
         double[] inToHidden;
         double[] hiddenToOut;
+        int endingEpoch = 0;
         // Initialize the weight at the beginning
         initializeWeights();
         for (int i = 0; i < epochNum; i++) {
@@ -179,6 +180,7 @@ public class NeuralNet implements NeuralNetInterface {
             listOfErrors.add(trainingError);
             if (trainingError < 0.05) {
                 System.out.println("Reach total error less than 0.05 in epoch: " + i);
+                endingEpoch = i;
                 break;
             }
         }
@@ -188,6 +190,7 @@ public class NeuralNet implements NeuralNetInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return endingEpoch;
     }
 
     @Override
@@ -201,6 +204,14 @@ public class NeuralNet implements NeuralNetInterface {
         writer.close();
     }
 
+    public int repeatTraining(int num) {
+        int ret = 0;
+        for (int i = 0; i < num; i++) {
+            ret += train(30000);
+        }
+        return ret / num;
+    }
+
     public static void main(String[] args) {
         NeuralNet neuralNetBinaryNoMomentum = new NeuralNet(4, false, 0.2, 0,
                 new double[][]{{bias,0,0}, {bias,1,0}, {bias,0,1}, {bias,1,1}}, new double[][]{{0},{1},{1},{0}});
@@ -211,5 +222,8 @@ public class NeuralNet implements NeuralNetInterface {
         neuralNetBinaryNoMomentum.train(30000); // give it a large enough number
         neuralNetBipolarNoMomentum.train(10000);
         neuralNetBipolarMomentum.train(10000);
+        System.out.println("The average epoch number to reach less than 0.05 error is : " +neuralNetBinaryNoMomentum.repeatTraining(500));
+        System.out.println("The average epoch number to reach less than 0.05 error is : " +neuralNetBipolarNoMomentum.repeatTraining(500));
+        System.out.println("The average epoch number to reach less than 0.05 error is : " + neuralNetBipolarMomentum.repeatTraining( 500));
     }
 }
