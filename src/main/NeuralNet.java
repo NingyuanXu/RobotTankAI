@@ -26,7 +26,7 @@ public class NeuralNet implements NeuralNetInterface {
 
     // Model weights and bias term
     private double[][] inputToHiddenWeights;
-    private double[][] hiddenToOuputWeights;
+    private double[][] hiddenToOutputWeights;
     private double[][] inputToHiddenDelta;
     private double[][] hiddenToOuputDelta;
 
@@ -46,10 +46,10 @@ public class NeuralNet implements NeuralNetInterface {
         this.input = input;
         this.expectedOutput = expectedOutput;
 
-        this.inputToHiddenWeights = new double[numInput][numHidden];
-        this.hiddenToOuputWeights = new double[numHidden][numOutput];
-        this.inputToHiddenDelta = new double[numInput][numHidden];
-        this.hiddenToOuputDelta = new double[numHidden][numOutput];
+        this.inputToHiddenWeights = new double[numInput + 1][numHidden];
+        this.hiddenToOutputWeights = new double[numHidden + 1][numOutput];
+        this.inputToHiddenDelta = new double[numInput + 1][numHidden]; // prev weight changes
+        this.hiddenToOuputDelta = new double[numHidden + 1][numOutput];
     }
 
     @Override
@@ -59,7 +59,7 @@ public class NeuralNet implements NeuralNetInterface {
 
     @Override
     public double customSigmoid(double x) {
-        return isBipolar ? -1 + 2 / (1 + Math.exp(-x)) : sigmoid(x);
+        return isBipolar ? -1 + 2 / (1 + Math.exp(-2 * x)) : sigmoid(x);
     }
 
     @Override
@@ -69,9 +69,9 @@ public class NeuralNet implements NeuralNetInterface {
                 inputToHiddenWeights[i][j] = minWeight + (Math.random() * (maxWeight - minWeight));
             }
         }
-        for (int i = 0; i < hiddenToOuputWeights.length; i++) {
-            for (int j = 0; j < hiddenToOuputWeights[0].length; j++) {
-                hiddenToOuputWeights[i][j] = minWeight + (Math.random() * (maxWeight - minWeight));
+        for (int i = 0; i < hiddenToOutputWeights.length; i++) {
+            for (int j = 0; j < hiddenToOutputWeights[0].length; j++) {
+                hiddenToOutputWeights[i][j] = minWeight + (Math.random() * (maxWeight - minWeight));
             }
         }
     }
@@ -79,46 +79,91 @@ public class NeuralNet implements NeuralNetInterface {
     @Override
     public double[][] feedForward() {
         // forward from input to hidden layer
-        double[] inToHidden = new double[numHidden];
-        for (int i = 0; i < inToHidden.length; i++) {
+        double[] inToHidden = new double[numHidden + 1];
+        inToHidden[0] = bias;
+        for (int i = 1; i < inToHidden.length; i++) {
             inToHidden[i] = 0;
             for (int j = 0; j < inputToHiddenWeights.length; j++) {
-                inToHidden[i] += input[counterNumExample][j] * inputToHiddenWeights[j][i];
+                inToHidden[i] += input[counterNumExample][j] * inputToHiddenWeights[j][i-1];
             }
-            inToHidden[i] = customSigmoid(inToHidden[i] + bias);
+            inToHidden[i] = customSigmoid(inToHidden[i]);
         }
         // forward from hidden to out layer
         double[] hiddenToOut = new double[numOutput];
         for (int i = 0; i < hiddenToOut.length; i++) {
             hiddenToOut[i] = 0;
-            for (int j = 0; j < hiddenToOuputWeights.length; j++) {
-                hiddenToOut[i] += inToHidden[j] * hiddenToOuputWeights[j][i];
+            for (int j = 0; j < hiddenToOutputWeights.length; j++) {
+                hiddenToOut[i] += inToHidden[j] * hiddenToOutputWeights[j][i];
             }
-            hiddenToOut[i] = customSigmoid(hiddenToOut[i] + bias);
+            hiddenToOut[i] = customSigmoid(hiddenToOut[i]);
         }
         return new double[][]{inToHidden, hiddenToOut};
     }
 
     @Override
     public void backPropagation(double[] inToHidden, double[] hiddenToOut) {
+        double[] errorSignalHidden;
+        double[] errorSignalOutput;
+        // Compute output error signal
+        errorSignalOutput = computeErrorSignalOutput(hiddenToOut);
+        // update weights hiddenToOut
+        for (int i = 0; i < hiddenToOutputWeights.length; i++) {
+            for (int j = 0; j < hiddenToOutputWeights[0].length; j++) {
+                hiddenToOuputDelta[i][j] = momentum * hiddenToOuputDelta[i][j] + learningRate * errorSignalOutput[j] * inToHidden[i];
+                hiddenToOutputWeights[i][j] += hiddenToOuputDelta[i][j];
+            }
+        }
+        errorSignalHidden = computeErrorSignalHidden(inToHidden, errorSignalOutput);
+        // update weights inToHidden
+        for (int i = 0; i < inputToHiddenWeights.length; i++) {
+            for (int j = 1; j < inputToHiddenWeights[0].length; j++) {
+                inputToHiddenDelta[i][j-1] = momentum * inputToHiddenDelta[i][j-1] + learningRate * input[counterNumExample][i] * errorSignalHidden[j];
+                inputToHiddenWeights[i][j-1] += inputToHiddenDelta[i][j-1];
+            }
+        }
+    }
 
+    private double[] computeErrorSignalHidden(double[] inToHidden, double[] errorSignalOutput) {
+        double[] errorSignalHidden = new double[numHidden + 1];
+        for (int i = 0; i < errorSignalHidden.length; i++) {
+            for (int j = 0; j < numOutput; j++) {
+                errorSignalHidden[i] += hiddenToOutputWeights[i][j] * errorSignalOutput[j];
+            }
+            if (isBipolar) {
+                errorSignalHidden[i] *= (1 - inToHidden[i] * inToHidden[i]);
+            } else {
+                errorSignalHidden[i] *= inToHidden[i] * (1 - inToHidden[i]);
+            }
+        }
+        return errorSignalHidden;
+    }
+
+    private double[] computeErrorSignalOutput(double[] hiddenToOut) {
+        double[] errorSignalOutput = new double[numOutput];
+        if (isBipolar) {
+            for (int i = 0; i < hiddenToOut.length; i++) {
+                errorSignalOutput[i] = (1 - hiddenToOut[i] * hiddenToOut[i]) * (expectedOutput[counterNumExample][i] - hiddenToOut[i]);
+            }
+        } else {
+            for (int i = 0; i < hiddenToOut.length; i++) {
+                errorSignalOutput[i] = hiddenToOut[i] * (1 - hiddenToOut[i]) * (expectedOutput[counterNumExample][i] - hiddenToOut[i]);
+            }
+        }
+        return errorSignalOutput;
     }
 
     @Override
     public void train(int epochNum) {
-        double trainingError = 0.0;
+        double trainingError;
         List<Double> listOfErrors = new ArrayList<>();
         double[] inToHidden;
         double[] hiddenToOut;
-
         // Initialize the weight at the beginning
         initializeWeights();
-
         for (int i = 0; i < epochNum; i++) {
             // Every new epoch, re-initialize
             counterNumExample = 0;
             trainingError = 0.0;
-
             // Repeat checking each example in the dataset
             while (counterNumExample < input.length) {
                 inToHidden = feedForward()[0];
@@ -130,9 +175,13 @@ public class NeuralNet implements NeuralNetInterface {
                 }
                 counterNumExample ++;
             }
+            trainingError /= 2; // 1/2 is added just to make derivative simpler, formula
             listOfErrors.add(trainingError);
+            if (trainingError < 0.05) {
+                System.out.println("Reach total error less than 0.05 in epoch: " + i);
+                break;
+            }
         }
-
         // Save the results
         try {
             save(listOfErrors);
@@ -143,7 +192,8 @@ public class NeuralNet implements NeuralNetInterface {
 
     @Override
     public void save(List<Double> listOfErrors) throws IOException {
-        FileWriter writer = new FileWriter("output.txt");
+        String s = isBipolar ? "bipolar_" + String.valueOf(momentum) +  ".csv" : "binary_" + String.valueOf(momentum) +  ".csv";
+        FileWriter writer = new FileWriter(s);
         ArrayList<Double> arr = new ArrayList<>(listOfErrors);
         for(Double dou: arr) {
             writer.write(dou + System.lineSeparator());
@@ -152,11 +202,14 @@ public class NeuralNet implements NeuralNetInterface {
     }
 
     public static void main(String[] args) {
-        NeuralNet neuralNetBinary = new NeuralNet(4, false, 0.2, 0,
-                new double[][]{{0,0}, {1,0}, {0,1}, {1,1}}, new double[][]{{0},{1},{1},{0}});
-        NeuralNet neuralNetBipolar = new NeuralNet(4, true, 0.2, 0,
-                new double[][]{{-1,-1}, {1,-1}, {-1,1}, {1,1}}, new double[][] {{0}, {1}, {1}, {0}});
-        neuralNetBinary.train(100);
-        neuralNetBipolar.train(100);
+        NeuralNet neuralNetBinaryNoMomentum = new NeuralNet(4, false, 0.2, 0,
+                new double[][]{{bias,0,0}, {bias,1,0}, {bias,0,1}, {bias,1,1}}, new double[][]{{0},{1},{1},{0}});
+        NeuralNet neuralNetBipolarNoMomentum = new NeuralNet(4, true, 0.2, 0,
+                new double[][]{{bias,-1,-1}, {bias,1,-1}, {bias,-1,1}, {bias,1,1}}, new double[][] {{-1}, {1}, {1}, {-1}});
+        NeuralNet neuralNetBipolarMomentum = new NeuralNet(4, true, 0.2, 0.9,
+                new double[][]{{bias,-1,-1}, {bias,1,-1}, {bias,-1,1}, {bias,1,1}}, new double[][] {{-1}, {1}, {1}, {-1}});
+        neuralNetBinaryNoMomentum.train(30000); // give it a large enough number
+        neuralNetBipolarNoMomentum.train(10000);
+        neuralNetBipolarMomentum.train(10000);
     }
 }

@@ -1,9 +1,6 @@
 package main;
 
-import java.io.IOException;
-import java.util.List;
-
-public interface NeuralNetInterface {
+public interface NeuralNetInterface extends CommonInterface {
 
     final double bias = 1.0; // The input for each neurons bias weight
 
@@ -12,10 +9,6 @@ public interface NeuralNetInterface {
     double customSigmoid(double x);
 
     void initializeWeights();
-
-    void train(int epochNum);
-
-    void save(List<Double> listOfErrors) throws IOException;
 
     double[][] feedForward();
 
