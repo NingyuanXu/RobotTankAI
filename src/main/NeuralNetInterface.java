@@ -1,6 +1,9 @@
 package main;
 
-public interface NeuralNetInterface extends CommonInterface {
+import java.io.IOException;
+import java.util.List;
+
+public interface NeuralNetInterface {
 
     final double bias = 1.0; // The input for each neurons bias weight
 
@@ -13,4 +16,8 @@ public interface NeuralNetInterface extends CommonInterface {
     double[][] feedForward();
 
     void backPropagation(double[] outputsHidden, double[] outputs);
+
+    int train(int epochNum);
+
+    void save(List<Double> listOfErrors) throws IOException;
 }

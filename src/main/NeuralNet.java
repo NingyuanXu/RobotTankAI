@@ -59,7 +59,7 @@ public class NeuralNet implements NeuralNetInterface {
 
     @Override
     public double customSigmoid(double x) {
-        return isBipolar ? -1 + 2 / (1 + Math.exp(-2 * x)) : sigmoid(x);
+        return isBipolar ? -1 + 2 / (1 + Math.exp(-x)) : sigmoid(x);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class NeuralNet implements NeuralNetInterface {
                 errorSignalHidden[i] += hiddenToOutputWeights[i][j] * errorSignalOutput[j];
             }
             if (isBipolar) {
-                errorSignalHidden[i] *= (1 - inToHidden[i] * inToHidden[i]);
+                errorSignalHidden[i] *= (1 - inToHidden[i] * inToHidden[i]) * 0.5;
             } else {
                 errorSignalHidden[i] *= inToHidden[i] * (1 - inToHidden[i]);
             }
@@ -142,7 +142,7 @@ public class NeuralNet implements NeuralNetInterface {
         double[] errorSignalOutput = new double[numOutput];
         if (isBipolar) {
             for (int i = 0; i < hiddenToOut.length; i++) {
-                errorSignalOutput[i] = (1 - hiddenToOut[i] * hiddenToOut[i]) * (expectedOutput[counterNumExample][i] - hiddenToOut[i]);
+                errorSignalOutput[i] = (1 - hiddenToOut[i] * hiddenToOut[i]) * (expectedOutput[counterNumExample][i] - hiddenToOut[i]) * 0.5;
             }
         } else {
             for (int i = 0; i < hiddenToOut.length; i++) {
@@ -207,7 +207,7 @@ public class NeuralNet implements NeuralNetInterface {
     public int repeatTraining(int num) {
         int ret = 0;
         for (int i = 0; i < num; i++) {
-            ret += train(1000000);
+            ret += train(10000);
         }
         return ret / num;
     }

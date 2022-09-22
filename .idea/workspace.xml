@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fb7db672-e7d4-4f1b-bddc-00faad077fe0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.Rapp.history" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/binary_0.0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/binary_0.0.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/binary_0.9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/binary_0.9.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bipolar_0.0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/bipolar_0.0.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bipolar_0.9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/bipolar_0.9.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI_CPEN502/main/CommonInterface.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI_CPEN502/main/NeuralNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI_CPEN502/main/NeuralNet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI_CPEN502/main/NeuralNetInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI_CPEN502/main/NeuralNetInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/CommonInterface.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NeuralNet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/NeuralNetInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NeuralNetInterface.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,14 +53,15 @@
     <session id="-2018864764">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.18" value="1" />
+          <entry key="project.open.time.19" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="3" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -72,12 +82,12 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="18" />
-          <entry key="java" value="6636" />
+          <entry key="java" value="6704" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="6636" />
+          <entry key="JAVA" value="6704" />
           <entry key="PLAIN_TEXT" value="18" />
         </counts>
       </usages-collector>
@@ -85,35 +95,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/NeuralNet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="222" column="117" lean-forward="true" selection-start-line="222" selection-start-column="117" selection-end-line="222" selection-end-column="117" />
+            <state relative-caret-position="283">
+              <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1839#1840#0" expanded="true" />
+                <element signature="e#1884#1885#0" expanded="true" />
+                <element signature="e#1943#1944#0" expanded="true" />
+                <element signature="e#2022#2023#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/CommonInterface.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="10" selection-end-line="10" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/NeuralNetInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="16" />
+            <state relative-caret-position="210">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,8 +140,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/PlotUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/NeuralNetInterface.java" />
         <option value="$PROJECT_DIR$/src/main/CommonInterface.java" />
+        <option value="$PROJECT_DIR$/src/main/NeuralNetInterface.java" />
         <option value="$PROJECT_DIR$/src/main/NeuralNet.java" />
       </list>
     </option>
@@ -240,14 +245,14 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49903288" visible="true" weight="0.17406625" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49903288" visible="true" weight="0.17406625" />
       <window_info id="Structure" order="1" sideWeight="0.50096714" side_tool="true" weight="0.24947146" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.329429" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3493976" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24939759" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -290,30 +295,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/binary_0.9.csv">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/CommonInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="10" selection-end-line="10" />
+        <state relative-caret-position="90">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/NeuralNetInterface.java">
+    <entry file="file://$PROJECT_DIR$/src/main/NeuralNet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="16" />
+        <state relative-caret-position="283">
+          <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1839#1840#0" expanded="true" />
+            <element signature="e#1884#1885#0" expanded="true" />
+            <element signature="e#1943#1944#0" expanded="true" />
+            <element signature="e#2022#2023#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/binary_0.9.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/NeuralNet.java">
+    <entry file="file://$PROJECT_DIR$/src/main/NeuralNetInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="222" column="117" lean-forward="true" selection-start-line="222" selection-start-column="117" selection-end-line="222" selection-end-column="117" />
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
