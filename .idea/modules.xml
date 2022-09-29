@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RobotTankAI_CPEN502.iml" filepath="$PROJECT_DIR$/RobotTankAI_CPEN502.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RobotTankAI.iml" filepath="$PROJECT_DIR$/RobotTankAI.iml" />
     </modules>
   </component>
 </project>
