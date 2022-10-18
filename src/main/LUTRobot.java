@@ -10,9 +10,12 @@ import java.io.File;
 public class LUTRobot extends AdvancedRobot {
 
     // Declare game global variables
-    private static LUT lut = new LUT();
-    private static double numWinsPer100Round = 0.0;
+    private static double numWinsPerGroupRound = 0.0;
     private static int roundNumber = 1;
+
+    // Reinforcement learning part
+    private static LUT lut = new LUT(); // same LUT !!
+    private QLearning agent;
 
     // Robot state/action variable, not static
     // Initialize each time for a new robot round
@@ -20,9 +23,6 @@ public class LUTRobot extends AdvancedRobot {
     private int currentState;
     private int hasHitWall = 0;
     private int isHitByBullet = 0;
-
-    // Reinforcement learning part
-    private QLearning agent;
     private EnemyRobot enemyTank;
 
     // Reward policy
@@ -44,11 +44,10 @@ public class LUTRobot extends AdvancedRobot {
         setAdjustGunForRobotTurn(true);
         setAdjustRadarForGunTurn(true);
 
+        // IMPORTANT: SET UP HYPER-PARAMETER HERE !!!!!
+        agent = new QLearning(lut, 0.2, 0.9, 0.5, false);
         enemyTank = new EnemyRobot();
         RobotStates.initialEnergy = this.getEnergy();
-
-        // IMPORTANT: SET UP HYPER-PARAMETER HERE !!!!!
-        agent = new QLearning(lut, 0.2, 0.9, 0.3, false);
 
         // Endless while loop that controls the normal behaviour of your robot
         while (true) {
@@ -155,7 +154,7 @@ public class LUTRobot extends AdvancedRobot {
     @Override
     public void onWin(WinEvent event) {
         currentReward += winReward;
-        numWinsPer100Round++;
+        numWinsPerGroupRound++;
         agent.train(currentState, currentAction, currentReward);
     }
 
@@ -169,7 +168,7 @@ public class LUTRobot extends AdvancedRobot {
     public void onRoundEnded(RoundEndedEvent event) {
         if (roundNumber % 100 == 0) {
             writeWinRates();
-            numWinsPer100Round = 0.0;
+            numWinsPerGroupRound = 0.0;
         }
         roundNumber ++;
         try
@@ -259,7 +258,7 @@ public class LUTRobot extends AdvancedRobot {
     }
 
     private void writeWinRates() {
-        double winRate = numWinsPer100Round / 100.0;
+        double winRate = numWinsPerGroupRound / 100.0;
         System.out.println("\n\n" +"win rate"+ " " + winRate + "\n\n");
         File folder = getDataFile("winRate.txt");
         try{
