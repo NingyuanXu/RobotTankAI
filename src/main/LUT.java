@@ -1,6 +1,8 @@
 package main;
 
 
+import robocode.RobocodeFileOutputStream;
+
 import java.io.*;
 
 public class LUT implements LUTInterface{
@@ -46,79 +48,58 @@ public class LUT implements LUTInterface{
         }
     }
 
-    @Override
-    public void save() {
-        StringBuilder builder = new StringBuilder();
-        for(int i = 0; i < lookUpTable.length; i++)
+    public void save(File argFile) {
+        PrintStream saveLUT = null;
+        try {
+            saveLUT = new PrintStream(new RobocodeFileOutputStream(argFile));
+            for (int i = 0; i < numStates; i++)
+                for (int j = 0; j < numActions; j++)
+                    saveLUT.println(lookUpTable[i][j]);
+
+            if (saveLUT.checkError())
+                System.out.println("Could not save the data!");
+            saveLUT.close();
+        }
+        catch (IOException e)
         {
-            for(int j = 0; j < lookUpTable[0].length; j++)
-            {
-                builder.append(lookUpTable[i][j]+"");
-                if(j < lookUpTable[0].length - 1)
-                    builder.append(",");
+            System.out.println("IOException trying to write: " + e);
+        }
+        finally
+        {
+            try {
+                if (saveLUT != null)
+                    saveLUT.close();
             }
-            //append new line at the end of the row
-            builder.append("\n");
-        }
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter("LUT.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            //save the string representation of the lookup table
-            writer.write(builder.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            catch (Exception e)
+            {
+                System.out.println("Exception trying to close witer: " + e);
+            }
         }
     }
 
-    @Override
-    public void load() throws IOException {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader("LUT.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String line = "";
-        int row = 0;
-        while((line = reader.readLine()) != null)
-        {
-            //note that if you have used space as separator you have to split on " "
-            String[] cols = line.split(",");
-            int col = 0;
-            for(String  c : cols)
-            {
-                lookUpTable[row][col] = Double.parseDouble(c);
-                col++;
-            }
-            row++;
-        }
-        try {
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public void load(String argFileName) throws IOException {
+        FileInputStream inputFile = new FileInputStream(argFileName);
+        BufferedReader inputReader = null;
 
-    public static void main(String[] args) {
-        LUT lut = new LUT();
-        int index = RobotStates.getStateIndex(1,1,1,1,1,1);
-        System.out.println(lut.lookUpTable[index][5]);
-        System.out.println(lut.getMaxLUTActionAndQVal(1)[0]);
-        lut.save();
-        try {
-            lut.load();
-            System.out.println(lut.lookUpTable[0][5]);
-        } catch (IOException e) {
-            e.printStackTrace();
+        try   {
+            inputReader = new BufferedReader(new InputStreamReader(inputFile));
+            for (int i = 0; i < RobotStates.numStates; i++)
+                for (int j = 0; j < RobotActions.numActions; j++)
+                    lookUpTable[i][j] = Double.parseDouble(inputReader.readLine());
+        }
+        catch (IOException e)   {
+            System.out.println("IOException trying to open reader: " + e);
+        }
+        catch (NumberFormatException e)   {
+        }
+        finally {
+            try {
+                if (inputReader != null)
+                    inputReader.close();
+            }
+            catch (IOException e) {
+                System.out.println("IOException trying to close reader: " + e);
+            }
         }
     }
 }

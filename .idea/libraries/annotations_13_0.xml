@@ -22,6 +22,7 @@
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../robocode/libs/org.osgi.service.prefs-1.1.2.jar!/OSGI-OPT/src" />
       <root url="jar://$PROJECT_DIR$/../robocode/libs/osgi.annotation-8.0.1.jar!/OSGI-OPT/src" />
+      <root url="jar://$USER_HOME$/.ideaLibSources/robocode.core-1.9.4.7-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

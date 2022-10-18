@@ -23,7 +23,7 @@ public class QLearning {
     public void train(int state, int action, double reward) {
         // if state and action not initialize yet, initialize first
         if (prevState != -1 && prevAction != -1) {
-            double QVal = this.lookUpTable.getLookUpTableValue(state, action);
+            double QVal = this.lookUpTable.getLookUpTableValue(prevState, prevAction);
             if (isOnPolicy) {
                 // Sarsa on-policy
                 QVal += this.learningRate * (reward + this.discountRate * this.lookUpTable.getLookUpTableValue(state, action) - QVal) ;

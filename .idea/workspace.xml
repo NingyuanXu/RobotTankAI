@@ -2,26 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="025e7f75-61f4-4fa4-a0bd-305e9646d530" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/annotations_13_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/CommonInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/EnemyRobot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/LUT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/LUTInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/LUTRobot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/QLearning.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/RobotActions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/RobotStates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/SuperCrazy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/annotations_13_0.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/annotations_13_0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RobotTankAI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RobotTankAI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNetInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNetInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI_CPEN502/main/NeuralNet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI_CPEN502/main/NeuralNetInterface.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI_CPEN502/test/NeuralNetTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NeuralNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/NeuralNetInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NeuralNetInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LUT.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/robocode.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/robocode.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/window.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/window.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/EnemyRobot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/EnemyRobot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/RobotStates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/RobotStates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/test/NeuralNetTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/robots/robot.database" beforeDir="false" afterPath="$PROJECT_DIR$/robots/robot.database" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/EnemyRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/EnemyRobot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/LUT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/LUTInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUTInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/LUTRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUTRobot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/QLearning.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/QLearning.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/RobotStates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RobotStates.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/NeuralNetTest.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,59 +40,127 @@
     <session id="-2018864764">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="10" />
+          <entry key="project.closed" value="17" />
           <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.6" value="2" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.6" value="5" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="1" />
+          <entry key="LUT" value="1" />
+          <entry key="class" value="5" />
           <entry key="iml" value="2" />
-          <entry key="java" value="27" />
-          <entry key="txt" value="18" />
+          <entry key="java" value="46" />
+          <entry key="txt" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="1" />
+          <entry key="CLASS" value="5" />
           <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="27" />
-          <entry key="PLAIN_TEXT" value="18" />
+          <entry key="JAVA" value="46" />
+          <entry key="PLAIN_TEXT" value="29" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="93" />
-          <entry key="java" value="7178" />
-          <entry key="txt" value="29" />
+          <entry key="java" value="9376" />
+          <entry key="txt" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="7178" />
-          <entry key="PLAIN_TEXT" value="122" />
+          <entry key="JAVA" value="9376" />
+          <entry key="PLAIN_TEXT" value="124" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/LUT.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-62">
+              <caret line="37" column="43" lean-forward="true" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#429#430#0" expanded="true" />
+                <element signature="e#478#479#0" expanded="true" />
+                <element signature="e#1090#1091#0" expanded="true" />
+                <element signature="e#1140#1141#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/LUTRobot.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1247">
+              <caret line="117" column="13" lean-forward="true" selection-start-line="117" selection-start-column="13" selection-end-line="117" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4914#4915#0" expanded="true" />
+                <element signature="e#4957#4958#0" expanded="true" />
+                <element signature="e#5385#5386#0" expanded="true" />
+                <element signature="e#5427#5428#0" expanded="true" />
+                <element signature="e#5488#5489#0" expanded="true" />
+                <element signature="e#5530#5531#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/winRate.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/QLearning.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>numWins</find>
+      <find>onHit</find>
+      <find>save</find>
+      <find>on</find>
+      <find>currentReward</find>
+      <find>numWinsPer100Round</find>
+      <find>agent.train</find>
+      <find>enemyTank.velocity</find>
+      <find>enemyTank.bearing</find>
+      <find>enemyTank.distance</find>
+      <find>enemyTank.y</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -104,29 +172,34 @@
         <option value="$PROJECT_DIR$/src/main/LookUpTable.java" />
         <option value="$PROJECT_DIR$/src/main/RobotActions.java" />
         <option value="$PROJECT_DIR$/src/main/MyRobot.java" />
-        <option value="$PROJECT_DIR$/src/main/EnemyRobot.java" />
-        <option value="$PROJECT_DIR$/src/main/LUTRobot.java" />
-        <option value="$PROJECT_DIR$/src/main/RobotStates.java" />
         <option value="$PROJECT_DIR$/src/main/LearningAgent.java" />
         <option value="$PROJECT_DIR$/src/main/ReinforcementLearning.java" />
         <option value="$PROJECT_DIR$/src/main/RL.java" />
         <option value="$PROJECT_DIR$/src/main/RLLearning.java" />
         <option value="$PROJECT_DIR$/src/main/RLAlgorithm.java" />
         <option value="$PROJECT_DIR$/src/main/RLAgent.java" />
-        <option value="$PROJECT_DIR$/src/main/QLearning.java" />
-        <option value="$PROJECT_DIR$/src/main/LUTInterface.java" />
         <option value="$PROJECT_DIR$/src/main/NeuralNetInterface.java" />
+        <option value="$PROJECT_DIR$/LUT.txt" />
+        <option value="$PROJECT_DIR$/src/main/RobotStates.java" />
         <option value="$PROJECT_DIR$/src/main/CommonInterface.java" />
         <option value="$PROJECT_DIR$/src/main/NeuralNet.java" />
-        <option value="$PROJECT_DIR$/LUT.txt" />
+        <option value="$PROJECT_DIR$/src/main/LUTInterface.java" />
         <option value="$PROJECT_DIR$/src/main/LUT.java" />
+        <option value="$PROJECT_DIR$/src/main/EnemyRobot.java" />
+        <option value="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/LUT.txt" />
+        <option value="$PROJECT_DIR$/src/main/Supercrazy.java" />
+        <option value="$PROJECT_DIR$/src/main/SuperCrazy.java" />
+        <option value="$PROJECT_DIR$/src/main/LUTRobot.java" />
+        <option value="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/winRate.txt" />
+        <option value="$PROJECT_DIR$/src/main/QLearning.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="25" />
+    <option name="x" value="-25" />
+    <option name="y" value="62" />
     <option name="width" value="1440" />
-    <option name="height" value="772" />
+    <option name="height" value="776" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -145,6 +218,41 @@
             <path>
               <item name="RobotTankAI" type="b2602c69:ProjectViewProjectNode" />
               <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RobotTankAI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RobotTankAI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RobotTankAI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RobotTankAI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
+              <item name="out" type="462c0819:PsiDirectoryNode" />
+              <item name="production" type="462c0819:PsiDirectoryNode" />
+              <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="LUTRobot.data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="RobotTankAI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -152,10 +260,6 @@
               <item name="RobotTankAI" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RobotTankAI" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -181,7 +285,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.LUT">
+  <component name="RunManager" selected="Application.Robot">
     <configuration name="LUT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="main.LUT" />
       <module name="RobotTankAI" />
@@ -210,9 +314,11 @@
       </method>
     </configuration>
     <configuration name="Robot" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="12" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="INCLUDE_PROVIDED_SCOPE" value="true" />
       <option name="MAIN_CLASS_NAME" value="robocode.Robocode" />
       <module name="RobotTankAI" />
-      <option name="VM_PARAMETERS" value="-DONOSECURITY=TRUE" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -255,25 +361,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1440" height="772" extended-state="0" />
+    <frame x="-25" y="62" width="1440" height="776" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21353066" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22198732" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.21661721" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.20058997" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Problems" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49964765" weight="0.32891566" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5003524" side_tool="true" weight="0.27831325" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32789317" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32650602" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -281,14 +388,14 @@
       <window_info anchor="right" id="Palette&#9;" order="4" />
     </layout>
     <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21353066" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22198732" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20178041" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27831325" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -297,7 +404,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32789317" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32650602" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -316,73 +423,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/NeuralNetTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/../robocode/libs/robocode.jar!/robocode/ScannedRobotEvent.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
           <caret line="47" column="58" lean-forward="true" selection-start-line="47" selection-start-column="58" selection-end-line="47" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/RobotStates.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="62" selection-start-line="11" selection-start-column="62" selection-end-line="11" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/RobotActions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="36" selection-start-line="9" selection-start-column="36" selection-end-line="9" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/QLearning.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/LUTRobot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/EnemyRobot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="17" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/CommonInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/LUTInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/NeuralNetInterface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="1" lean-forward="true" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -392,26 +436,144 @@
     <entry file="file://$PROJECT_DIR$/inputToHiddenWeights.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/LUT.txt">
+    <entry file="file://$PROJECT_DIR$/src/main/NeuralNetInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="23" selection-start-column="23" selection-end-column="23" />
+        <state relative-caret-position="270">
+          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/LUT.java">
+    <entry file="file://$PROJECT_DIR$/src/main/RobotActions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="99" column="19" lean-forward="true" selection-start-line="99" selection-start-column="19" selection-end-line="99" selection-end-column="19" />
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../robocode/libs/robocode.jar!/robocode/Robot.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="79" column="18" selection-start-line="79" selection-start-column="18" selection-end-line="79" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/RobotStates.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-12">
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/CommonInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../robocode/libs/robocode.core-1.9.4.7.jar!/net/sf/robocode/core/RobocodeMain.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1352">
+          <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/LUTInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/NeuralNet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="361" column="33" lean-forward="true" selection-start-line="361" selection-start-column="33" selection-end-line="361" selection-end-column="33" />
+        <state relative-caret-position="671">
+          <caret line="216" column="21" selection-start-line="216" selection-start-column="21" selection-end-line="216" selection-end-column="21" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LUT.txt" />
+    <entry file="jar://$USER_HOME$/.ideaLibSources/robocode.core-1.9.4.7-sources.jar!/net/sf/robocode/core/RobocodeMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="165" column="35" selection-start-line="165" selection-start-column="35" selection-end-line="165" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/winRate.txt" />
+    <entry file="file://$PROJECT_DIR$/src/test/NeuralNetTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/EnemyRobot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/QLearning.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-298">
+          <folding>
+            <element signature="e#0#1588#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/SuperCrazy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#6379#6380#0" expanded="true" />
+            <element signature="e#6428#6429#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/LUT.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16254" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/LUT.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-62">
+          <caret line="37" column="43" lean-forward="true" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#429#430#0" expanded="true" />
+            <element signature="e#478#479#0" expanded="true" />
+            <element signature="e#1090#1091#0" expanded="true" />
+            <element signature="e#1140#1141#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/QLearning.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/LUTRobot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1247">
+          <caret line="117" column="13" lean-forward="true" selection-start-line="117" selection-start-column="13" selection-end-line="117" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4914#4915#0" expanded="true" />
+            <element signature="e#4957#4958#0" expanded="true" />
+            <element signature="e#5385#5386#0" expanded="true" />
+            <element signature="e#5427#5428#0" expanded="true" />
+            <element signature="e#5488#5489#0" expanded="true" />
+            <element signature="e#5530#5531#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/winRate.txt">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">

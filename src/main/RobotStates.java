@@ -3,7 +3,7 @@ package main;
 public class RobotStates {
 
     public static int maxDistance = 1000; // 1000 is the maximum distance in the game
-    public static double initialEnergy = 100.0; // initial energy in the game TODO: remove 100 later ?
+    public static double initialEnergy; // initial energy in the game
 
     public static final int numDirections = 4; // head, right, back, left
     public static final int numEnemyBearing = 4; // same
