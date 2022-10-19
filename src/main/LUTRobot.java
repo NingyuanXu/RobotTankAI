@@ -28,9 +28,10 @@ public class LUTRobot extends AdvancedRobot {
     // Reward policy
     private double currentReward = 0.0;
     private final double goodReward = 5.0;
-    private final double badReward = -2.0;
-    private final double winReward = 10;
-    private final double loseReward = -10;
+    private final double slightBadReward = -2.0;
+    private final double badReward = -5.0;
+    private final double winReward = 10.0;
+    private final double loseReward = -10.0;
 
     public void run() {
         // Initialize robot tank parts
@@ -117,7 +118,7 @@ public class LUTRobot extends AdvancedRobot {
     @Override
     public void onHitWall(HitWallEvent event) {
         hasHitWall = 1;
-        currentReward += badReward;
+        currentReward += slightBadReward;
         if(euclideanDistance(getX(), getY(),enemyTank.xCoord, enemyTank.yCoord)>200){
             double degToEnemy= getBearingToTarget(enemyTank.xCoord, enemyTank.yCoord, getX(), getY(), getHeadingRadians());
             setTurnRightRadians(degToEnemy);
@@ -134,7 +135,7 @@ public class LUTRobot extends AdvancedRobot {
     @Override
     public void onHitByBullet(HitByBulletEvent e){
         isHitByBullet = 1;
-        currentReward -= e.getBullet().getPower();
+        currentReward += badReward;
         double degToEnemy= getBearingToTarget(enemyTank.xCoord, enemyTank.yCoord, getX(), getY(), getHeadingRadians());
         setTurnRightRadians(degToEnemy+2);
         setAhead(100);
@@ -148,7 +149,7 @@ public class LUTRobot extends AdvancedRobot {
 
     @Override
     public void onHitRobot(HitRobotEvent e) {
-        currentReward += badReward;
+        currentReward += slightBadReward;
     }
 
     @Override
