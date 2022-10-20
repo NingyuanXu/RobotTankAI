@@ -12,6 +12,7 @@ public class LUTRobot extends AdvancedRobot {
     // Declare game global variables
     private static double numWinsPerGroupRound = 0.0;
     private static int roundNumber = 1;
+    private static double totalReward = 0.0;
 
     // Reinforcement learning part
     private static LUT lut = new LUT(); // same LUT !!
@@ -27,10 +28,9 @@ public class LUTRobot extends AdvancedRobot {
 
     // Reward policy
     private double currentReward = 0.0;
-    private final double goodReward = 5.0;
-    private final double slightBadReward = -2.0;
+    private final double goodReward = 10.0;
     private final double badReward = -5.0;
-    private final double winReward = 10.0;
+    private final double winReward = 30.0;
     private final double loseReward = -10.0;
 
     public void run() {
@@ -46,7 +46,7 @@ public class LUTRobot extends AdvancedRobot {
         setAdjustRadarForGunTurn(true);
 
         // IMPORTANT: SET UP HYPER-PARAMETER HERE !!!!!
-        agent = new QLearning(lut, 0.02, 0.9, 0.3, false);
+        agent = new QLearning(lut, 0.2, 0.9, 0.2, false);
         enemyTank = new EnemyRobot();
         RobotStates.initialEnergy = this.getEnergy();
 
@@ -118,7 +118,6 @@ public class LUTRobot extends AdvancedRobot {
     @Override
     public void onHitWall(HitWallEvent event) {
         hasHitWall = 1;
-        currentReward += slightBadReward;
         if(euclideanDistance(getX(), getY(),enemyTank.xCoord, enemyTank.yCoord)>200){
             double degToEnemy= getBearingToTarget(enemyTank.xCoord, enemyTank.yCoord, getX(), getY(), getHeadingRadians());
             setTurnRightRadians(degToEnemy);
@@ -130,12 +129,14 @@ public class LUTRobot extends AdvancedRobot {
     @Override
     public void onBulletHit(BulletHitEvent event) {
         currentReward += goodReward;
+        totalReward += goodReward;
     }
 
     @Override
     public void onHitByBullet(HitByBulletEvent e){
         isHitByBullet = 1;
         currentReward += badReward;
+        totalReward += badReward;
         double degToEnemy= getBearingToTarget(enemyTank.xCoord, enemyTank.yCoord, getX(), getY(), getHeadingRadians());
         setTurnRightRadians(degToEnemy+2);
         setAhead(100);
@@ -143,18 +144,9 @@ public class LUTRobot extends AdvancedRobot {
     }
 
     @Override
-    public void onBulletMissed(BulletMissedEvent event) {
-        currentReward += badReward;
-    }
-
-    @Override
-    public void onHitRobot(HitRobotEvent e) {
-        currentReward += slightBadReward;
-    }
-
-    @Override
     public void onWin(WinEvent event) {
         currentReward += winReward;
+        totalReward += winReward;
         numWinsPerGroupRound++;
         agent.train(currentState, currentAction, currentReward);
     }
@@ -162,17 +154,20 @@ public class LUTRobot extends AdvancedRobot {
     @Override
     public void onDeath(DeathEvent event) {
         currentReward += loseReward;
+        totalReward += loseReward;
         agent.train(currentState, currentAction, currentReward);
     }
 
     @Override
     public void onRoundEnded(RoundEndedEvent event) {
-        if (roundNumber % 100 == 0) {
-            writeWinRates();
+        if (roundNumber % 200 == 0) {
+            //writeWinRates();
+            writeTotalRewards();
             numWinsPerGroupRound = 0.0;
+            totalReward = 0.0;
         }
         roundNumber ++;
-        if (roundNumber % 10000 == 0) {
+        if (roundNumber % 50000 == 0) {
             try {
                 lut.save(getDataFile("LUT.txt"));
             } catch (Exception e) {
@@ -249,12 +244,25 @@ public class LUTRobot extends AdvancedRobot {
     }
 
     private void writeWinRates() {
-        double winRate = numWinsPerGroupRound / 100.0;
+        double winRate = numWinsPerGroupRound / 200.0;
         System.out.println("\n\n" +"win rate"+ " " + winRate + "\n\n");
         File folder = getDataFile("winRate.txt");
         try{
             RobocodeFileWriter fileWriter = new RobocodeFileWriter(folder.getAbsolutePath(), true);
             fileWriter.write(Double.toString(winRate) + "\r\n");
+            fileWriter.close();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+
+    public void writeTotalRewards() {
+        File folder = getDataFile("totalRewards.txt");
+        try{
+            RobocodeFileWriter fileWriter = new RobocodeFileWriter(folder.getAbsolutePath(), true);
+            fileWriter.write(Double.toString(totalReward) + "\r\n");
             fileWriter.close();
         }
         catch(Exception e){
