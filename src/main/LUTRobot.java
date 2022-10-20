@@ -46,7 +46,7 @@ public class LUTRobot extends AdvancedRobot {
         setAdjustRadarForGunTurn(true);
 
         // IMPORTANT: SET UP HYPER-PARAMETER HERE !!!!!
-        agent = new QLearning(lut, 0.2, 0.9, 0.2, false);
+        agent = new QLearning(lut, 0.02, 0.9, 0.3, false);
         enemyTank = new EnemyRobot();
         RobotStates.initialEnergy = this.getEnergy();
 
@@ -167,7 +167,7 @@ public class LUTRobot extends AdvancedRobot {
 
     @Override
     public void onRoundEnded(RoundEndedEvent event) {
-        if (roundNumber % 1000 == 0) {
+        if (roundNumber % 100 == 0) {
             writeWinRates();
             numWinsPerGroupRound = 0.0;
         }
@@ -249,7 +249,7 @@ public class LUTRobot extends AdvancedRobot {
     }
 
     private void writeWinRates() {
-        double winRate = numWinsPerGroupRound / 1000.0;
+        double winRate = numWinsPerGroupRound / 100.0;
         System.out.println("\n\n" +"win rate"+ " " + winRate + "\n\n");
         File folder = getDataFile("winRate.txt");
         try{
