@@ -46,7 +46,7 @@ public class LUTRobot extends AdvancedRobot {
         setAdjustRadarForGunTurn(true);
 
         // IMPORTANT: SET UP HYPER-PARAMETER HERE !!!!!
-        agent = new QLearning(lut, 0.2, 0.9, 0.5, false);
+        agent = new QLearning(lut, 0.2, 0.9, 0.2, false);
         enemyTank = new EnemyRobot();
         RobotStates.initialEnergy = this.getEnergy();
 
@@ -54,7 +54,6 @@ public class LUTRobot extends AdvancedRobot {
         while (true) {
             selectRobotActions();
             moveRadar();
-            execute();
         }
     }
 
