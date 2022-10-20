@@ -53,7 +53,8 @@ public class LUTRobot extends AdvancedRobot {
         // Endless while loop that controls the normal behaviour of your robot
         while (true) {
             selectRobotActions();
-            moveRadar();
+            agent.train(currentState, currentAction, currentReward);
+            this.currentReward = 0; // reset reward here !
         }
     }
 
@@ -184,11 +185,8 @@ public class LUTRobot extends AdvancedRobot {
     // Function to decide the next action for the robot to take
     public void selectRobotActions() {
         int state = getRobotState();
+        System.out.println("!!!!!!!!!!!!!!!!" + state);
         currentAction = agent.getAction(state);
-
-        // IMPORTANT RL learning here
-        agent.train(currentState, currentAction, currentReward);
-        this.currentReward = 0; // reset reward here
 
         // reset the state
         this.hasHitWall = 0;
@@ -224,11 +222,6 @@ public class LUTRobot extends AdvancedRobot {
                 execute();
                 break;
         }
-    }
-
-    public void moveRadar() {
-        if (getRadarTurnRemaining() == 0.0)
-            setTurnRadarRightRadians(Double.POSITIVE_INFINITY);
     }
 
     // Get the state index for the current robot, using RobotStates class to helper
