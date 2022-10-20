@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="025e7f75-61f4-4fa4-a0bd-305e9646d530" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/config/robocode.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/robocode.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/window.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/window.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/totalRewards.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/totalRewards.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -45,7 +43,7 @@
           <entry key="class" value="6" />
           <entry key="iml" value="2" />
           <entry key="java" value="82" />
-          <entry key="txt" value="78" />
+          <entry key="txt" value="80" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -53,7 +51,7 @@
           <entry key="CLASS" value="6" />
           <entry key="IDEA_MODULE" value="2" />
           <entry key="JAVA" value="82" />
-          <entry key="PLAIN_TEXT" value="79" />
+          <entry key="PLAIN_TEXT" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -85,13 +83,14 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/LUT.txt">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/totalRewards.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="193" column="3" lean-forward="true" selection-start-line="193" selection-start-column="3" selection-end-line="193" selection-end-column="3" />
-            </state>
-          </provider>
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -530,9 +529,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/LUT.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/LUTRobot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1951">
@@ -543,12 +539,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/LUT.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/totalRewards.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="193" column="3" lean-forward="true" selection-start-line="193" selection-start-column="3" selection-end-line="193" selection-end-column="3" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
