@@ -167,12 +167,12 @@ public class LUTRobot extends AdvancedRobot {
 
     @Override
     public void onRoundEnded(RoundEndedEvent event) {
-        if (roundNumber % 100 == 0) {
+        if (roundNumber % 1000 == 0) {
             writeWinRates();
             numWinsPerGroupRound = 0.0;
         }
         roundNumber ++;
-        if (roundNumber % 1000 == 0) {
+        if (roundNumber % 10000 == 0) {
             try {
                 lut.save(getDataFile("LUT.txt"));
             } catch (Exception e) {
@@ -249,7 +249,7 @@ public class LUTRobot extends AdvancedRobot {
     }
 
     private void writeWinRates() {
-        double winRate = numWinsPerGroupRound / 100.0;
+        double winRate = numWinsPerGroupRound / 1000.0;
         System.out.println("\n\n" +"win rate"+ " " + winRate + "\n\n");
         File folder = getDataFile("winRate.txt");
         try{
