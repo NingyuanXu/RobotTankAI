@@ -29,9 +29,9 @@ public class LUTRobot extends AdvancedRobot {
     // Reward policy
     private double currentReward = 0.0;
     private final double goodReward = 10.0;
-    private final double badReward = -5.0;
+    private final double badReward = -10.0;
     private final double winReward = 30.0;
-    private final double loseReward = -10.0;
+    private final double loseReward = -30.0;
 
     public void run() {
         // Initialize robot tank parts
@@ -160,14 +160,14 @@ public class LUTRobot extends AdvancedRobot {
 
     @Override
     public void onRoundEnded(RoundEndedEvent event) {
-        if (roundNumber % 200 == 0) {
+        if (roundNumber % 100 == 0) {
             //writeWinRates();
             writeTotalRewards();
             numWinsPerGroupRound = 0.0;
             totalReward = 0.0;
         }
         roundNumber ++;
-        if (roundNumber % 50000 == 0) {
+        if (roundNumber % 20000 == 0) {
             try {
                 lut.save(getDataFile("LUT.txt"));
             } catch (Exception e) {
