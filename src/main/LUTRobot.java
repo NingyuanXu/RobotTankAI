@@ -172,20 +172,18 @@ public class LUTRobot extends AdvancedRobot {
             numWinsPerGroupRound = 0.0;
         }
         roundNumber ++;
-        try
-        {
-            lut.save(getDataFile("LUT.txt"));
-        }
-        catch (Exception e)
-        {
-            out.println("Exception trying to write: " + e);
+        if (roundNumber % 1000 == 0) {
+            try {
+                lut.save(getDataFile("LUT.txt"));
+            } catch (Exception e) {
+                out.println("Exception trying to write: " + e);
+            }
         }
     }
 
     // Function to decide the next action for the robot to take
     public void selectRobotActions() {
         int state = getRobotState();
-        System.out.println("!!!!!!!!!!!!!!!!" + state);
         currentAction = agent.getAction(state);
 
         // reset the state
