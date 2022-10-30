@@ -1,0 +1,10 @@
+.idea/misc.xml
+.idea/workspace.xml
+RobotTankAI.iml
+binary_0.0.csv
+bipolar_0.9.csv
+config/*window.properties
+hiddenToOutputWeights.txt
+inputToHiddenWeights.txt
+out/*
+robots/robot.database
