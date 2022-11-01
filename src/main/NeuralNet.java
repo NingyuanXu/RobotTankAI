@@ -213,7 +213,6 @@ public class NeuralNet implements NeuralNetInterface {
         writer.close();
     }
 
-    @Override
     public void save() {
         StringBuilder builder1 = new StringBuilder();
         for(int i = 0; i < inputToHiddenWeights.length; i++)
@@ -275,7 +274,6 @@ public class NeuralNet implements NeuralNetInterface {
         }
     }
 
-    @Override
     public void load() throws IOException {
         BufferedReader reader1 = null;
         try {

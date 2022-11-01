@@ -1,124 +1,64 @@
 package main;
 
-
-import java.io.*;
-
 public class LUT implements LUTInterface{
 
-    static int numStates = RobotStates.numStates;
-    static int numActions = RobotActions.numActions;
-    public double[][] lookUpTable;
+    private int myHp, enemyHp , enemDis, wallDis, action;
+    public final int hpSize = RobotStates.MyHP.values().length;
+    public final int eneDisSize = RobotStates.EneDis.values().length;
+    public final int wallDisSize = RobotStates.WallDis.values().length;
+    public final int actionSize = RobotStates.Action.values().length;
+    public double[][][][][] lut;
+    public int[][][][][] visited;
 
     public LUT() {
-        lookUpTable = new double[numStates][numActions];
+        lut = new double[hpSize][hpSize][eneDisSize][wallDisSize][actionSize];
+        visited = new int[hpSize][hpSize][eneDisSize][wallDisSize][actionSize];
         initialiseLUT();
-    }
-
-    public double getLookUpTableValue(int state, int action) {
-        return lookUpTable[state][action];
     }
 
     // Given a state, find the maximum look up table value
     // associated with that state as well as action index
-    public double[] getMaxLUTActionAndQVal(int state) {
-        double maxQvalue = Double.NEGATIVE_INFINITY;
-        int bestAction = -1;
-        for (int i = 0; i < lookUpTable[state].length; i++) {
-            if (lookUpTable[state][i] > maxQvalue) {
-                maxQvalue = lookUpTable[state][i];
-                bestAction = i;
-            }
-        }
-        return new double[]{bestAction, maxQvalue};
-    }
-
-    public void setLookUpTableValue(double value, int state, int action) {
-        lookUpTable[state][action] = value;
-    }
-
     @Override
     public void initialiseLUT() {
         // all initialize to zero first
-        for (int i = 0; i < lookUpTable.length; i++) {
-            for (int j = 0; j < lookUpTable[0].length; j++) {
-                lookUpTable[i][j] = 0.0;
+        for (int i = 0; i < lut.length; i++) {
+            for (int j = 0; j < lut[0].length; j++) {
+                for (int k = 0; k < lut[0][0].length; k++) {
+                    for (int l = 0; l < lut[0][0][0].length; l++) {
+                        for (int m = 0; m < lut[0][0][0][0].length; m++) {
+                            lut[i][j][k][l][m] = Math.random();
+                            visited[i][j][k][l][m] = 0;
+                        }
+                    };
+                }
             }
         }
     }
 
-    @Override
-    public void save() {
-        StringBuilder builder = new StringBuilder();
-        for(int i = 0; i < lookUpTable.length; i++)
-        {
-            for(int j = 0; j < lookUpTable[0].length; j++)
-            {
-                builder.append(lookUpTable[i][j]+"");
-                if(j < lookUpTable[0].length - 1)
-                    builder.append(",");
+    public int getRandomAction(){
+        return (int) (actionSize * Math.random());
+    }
+    public int getBestAction(int myHp, int enemyHp ,int enemyDis, int wallDis){
+        double max = -1;
+        int bestAction = -1;
+        for(int i = 0; i < actionSize; i++){
+            if(max < lut[myHp][enemyHp][enemyDis][wallDis][i]){
+                max = lut[myHp][enemyHp][enemyDis][wallDis][i];
+                bestAction = i;
             }
-            //append new line at the end of the row
-            builder.append("\n");
         }
-        BufferedWriter writer = null;
-        try {
-            writer = new BufferedWriter(new FileWriter("LUT.txt"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            //save the string representation of the lookup table
-            writer.write(builder.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return bestAction;
     }
 
-    @Override
-    public void load() throws IOException {
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader("LUT.txt"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String line = "";
-        int row = 0;
-        while((line = reader.readLine()) != null)
-        {
-            //note that if you have used space as separator you have to split on " "
-            String[] cols = line.split(",");
-            int col = 0;
-            for(String  c : cols)
-            {
-                lookUpTable[row][col] = Double.parseDouble(c);
-                col++;
-            }
-            row++;
-        }
-        try {
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public double getQValue(int myHp, int enemyHp ,int enemyDis, int wallDis, int action){
+        return lut[myHp][enemyHp][enemyDis][wallDis][action];
+    }
+
+    public void setQValue(int myHp, int enemyHp ,int enemyDis, int wallDis, int action, double value){
+        lut[myHp][enemyHp][enemyDis][wallDis][action] = value;
+        visited[myHp][enemyHp][enemyDis][wallDis][action] += 1;
     }
 
     public static void main(String[] args) {
-        LUT lut = new LUT();
-        int index = RobotStates.getStateIndex(1,1,1,1,1,1);
-        System.out.println(lut.lookUpTable[index][5]);
-        System.out.println(lut.getMaxLUTActionAndQVal(1)[0]);
-        lut.save();
-        try {
-            lut.load();
-            System.out.println(lut.lookUpTable[0][5]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

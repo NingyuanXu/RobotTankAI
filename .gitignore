@@ -3,7 +3,9 @@
 RobotTankAI.iml
 binary_0.0.csv
 bipolar_0.9.csv
-config/*window.properties
+binary_0.9.csv
+bipolar_0.0.csv
+config/*
 hiddenToOutputWeights.txt
 inputToHiddenWeights.txt
 out/*

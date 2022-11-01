@@ -1,6 +1,6 @@
 package main;
 
-public interface NeuralNetInterface extends CommonInterface {
+public interface NeuralNetInterface {
 
     final double bias = 1.0; // The input for each neurons bias weight
 
