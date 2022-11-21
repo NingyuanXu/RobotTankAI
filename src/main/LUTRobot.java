@@ -1,6 +1,7 @@
 package main;
 
 import robocode.*;
+
 import java.awt.*;
 import java.io.File;
 
@@ -23,7 +24,7 @@ public class LUTRobot extends AdvancedRobot {
 
     public double myX = 0.0, myY = 0.0, myHP = 100, enemyHP = 100, dis = 0.0;
     public static boolean takeImmediate = true, onPolicy = true;
-    private double gamma = 0.9, alpha = 0.1, epsilon = 0, Q = 0.0, reward = 0.0;
+    private double gamma = 0.9, alpha = 0.1, epsilon = 0.0, Q = 0.0, reward = 0.0;
     private final double immediateBonus = 0.5, terminalBonus = 1.0, immediatePenalty = -0.1, terminalPenalty = -0.2;
 
     public static int curActionIndex;
@@ -32,10 +33,12 @@ public class LUTRobot extends AdvancedRobot {
     public static int totalRound = 0, round = 0, winRound = 0;
     public static double winPercentage = 0.0;
     public static String fileToSaveName = LUTRobot.class.getSimpleName() + "-" + "winningRate" + ".log";
-    public static String fileToSaveLUT = LUTRobot.class.getSimpleName() + "-" + "LUT";
+    public static String fileToSaveLUT = "lut1.0.txt";
     static LogFile log = new LogFile();
+    static int winRateRound = 100;
 
     public static LUT lut = new LUT();
+    public static boolean isLoad = false, isSave = false;
 
     public RobotStates.MyHP getHP(double hp){
         if(hp < 0){
@@ -112,6 +115,14 @@ public class LUTRobot extends AdvancedRobot {
 
     public void run() {
         super.run();
+        if(isLoad) {
+            try {
+                lut.load(getDataFile(fileToSaveLUT));
+                isLoad = false;
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
         setBulletColor(Color.red);
         setGunColor(Color.darkGray);
         setBodyColor(Color.blue);
@@ -161,7 +172,6 @@ public class LUTRobot extends AdvancedRobot {
                             break;
                         }
                     }
-
                     Q = getQ(reward, onPolicy);
                     lut.setQValue(preMyHp.ordinal(),
                             preEnemyHp.ordinal(),
@@ -240,6 +250,7 @@ public class LUTRobot extends AdvancedRobot {
             reward += immediatePenalty;
         }
     }
+
     @Override
     public void onWin(WinEvent e){
         reward = terminalBonus;
@@ -253,12 +264,20 @@ public class LUTRobot extends AdvancedRobot {
         );
         winRound++;
         totalRound++;
-        if((totalRound %100 == 0) && (totalRound != 0)) {
-            winPercentage = (double) winRound / 100;
+
+        if((totalRound % winRateRound == 0) && (totalRound != 0)) {
+            winPercentage = (double) winRound / winRateRound;
             System.out.println(String.format("%d, %.3f", ++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;
+
+
+            if(totalRound == 4000 && isSave){
+                File argFile = getDataFile(fileToSaveLUT);
+                lut.save(argFile);
+            }
+
         }
     }
 
@@ -274,14 +293,17 @@ public class LUTRobot extends AdvancedRobot {
                 Q
         );
         totalRound++;
-        if((totalRound %100 == 0) && (totalRound != 0)) {
-            winPercentage = (double) winRound / 100;
+
+        if((totalRound % winRateRound == 0) && (totalRound != 0)) {
+            winPercentage = (double) winRound / winRateRound;
             System.out.println(String.format("%d, %.3f", ++round, winPercentage));
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;
-
-
+            if(totalRound == 4000 && isSave == true) {
+                File argFile = getDataFile(fileToSaveLUT);
+                lut.save(argFile);
+            }
         }
     }
 

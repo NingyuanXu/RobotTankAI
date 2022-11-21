@@ -5,36 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="025e7f75-61f4-4fa4-a0bd-305e9646d530" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/LogFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/CommonInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RobotTankAI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RobotTankAI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/binary_0.0.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bipolar_0.9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LUT.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config/robocode.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/robocode.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/window.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/window.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hiddenToOutputWeights.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inputToHiddenWeights.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/CommonInterface.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTInterface.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNet.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNetInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNetInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/QLearning.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/RobotActions.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/RobotStates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/RobotStates.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/robots/robot.database" beforeDir="false" afterPath="$PROJECT_DIR$/robots/robot.database" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/CommonInterface.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/LUT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/LUTInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUTInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/LUTRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUTRobot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NeuralNet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/NeuralNetInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NeuralNetInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/QLearning.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/RobotActions.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/RobotStates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RobotStates.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,6 +117,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/murlocy/CPEN502/RobotTankAI",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -149,6 +129,11 @@
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Robocode">
     <configuration name="LUT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
@@ -195,7 +180,6 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="robocode.Robocode" />
       <module name="RobotTankAI" />
-      <option name="VM_PARAMETERS" value="-DONOSECURITY=TRUE" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -239,7 +223,8 @@
       <option name="presentableId" value="Default" />
       <updated>1664419086707</updated>
       <workItem from="1666754051029" duration="424000" />
-      <workItem from="1666911172347" duration="15040000" />
+      <workItem from="1666911172347" duration="15589000" />
+      <workItem from="1667857079964" duration="16625000" />
     </task>
     <servers />
   </component>
@@ -313,7 +298,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/LUTRobot.java</url>
-          <line>228</line>
+          <line>238</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
