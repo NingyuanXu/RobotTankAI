@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="025e7f75-61f4-4fa4-a0bd-305e9646d530" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/CircularQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Experience.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/ReplayMemory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/binary_0.0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/binary_0.0.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bipolar_0.9.csv" beforeDir="false" afterPath="$PROJECT_DIR$/bipolar_0.9.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/robocode.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/robocode.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/window.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/window.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hiddenToOutputWeights.txt" beforeDir="false" afterPath="$PROJECT_DIR$/hiddenToOutputWeights.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inputToHiddenWeights.txt" beforeDir="false" afterPath="$PROJECT_DIR$/inputToHiddenWeights.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/LUT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/LUT.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/winRate.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.data/winRate.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/LUT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/LUTRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUTRobot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NeuralNet.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,13 +24,13 @@
     <session id="-2018864764">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="25" />
+          <entry key="project.closed" value="26" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="1" />
-          <entry key="project.open.time.2" value="2" />
+          <entry key="project.open.time.2" value="3" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="2" />
@@ -49,7 +38,7 @@
           <entry key="project.open.time.7" value="4" />
           <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="26" />
+          <entry key="project.opened" value="27" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -58,7 +47,7 @@
           <entry key="class" value="6" />
           <entry key="csv" value="1" />
           <entry key="iml" value="2" />
-          <entry key="java" value="92" />
+          <entry key="java" value="95" />
           <entry key="txt" value="89" />
         </counts>
       </usages-collector>
@@ -66,7 +55,7 @@
         <counts>
           <entry key="CLASS" value="6" />
           <entry key="IDEA_MODULE" value="2" />
-          <entry key="JAVA" value="92" />
+          <entry key="JAVA" value="95" />
           <entry key="PLAIN_TEXT" value="91" />
         </counts>
       </usages-collector>
@@ -90,7 +79,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/LUTRobot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
+            <state relative-caret-position="570">
               <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -108,11 +97,61 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/NeuralNet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="325" column="83" lean-forward="true" selection-start-line="325" selection-start-column="83" selection-end-line="325" selection-end-column="83" />
+            <state relative-caret-position="318">
+              <caret line="339" column="13" lean-forward="true" selection-start-line="339" selection-start-column="13" selection-end-line="339" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/ReplayMemory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="234">
+              <caret line="16" column="25" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="25" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#536#537#0" expanded="true" />
+                <element signature="e#587#588#0" expanded="true" />
+                <element signature="e#657#658#0" expanded="true" />
+                <element signature="e#695#696#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/CircularQueue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+              <folding>
+                <element signature="e#169#170#0" expanded="true" />
+                <element signature="e#209#210#0" expanded="true" />
+                <element signature="e#367#368#0" expanded="true" />
+                <element signature="e#405#406#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/Experience.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
+              <folding>
+                <element signature="e#379#380#0" expanded="true" />
+                <element signature="e#414#415#0" expanded="true" />
+                <element signature="e#445#446#0" expanded="true" />
+                <element signature="e#481#482#0" expanded="true" />
+                <element signature="e#515#516#0" expanded="true" />
+                <element signature="e#551#552#0" expanded="true" />
+                <element signature="e#587#588#0" expanded="true" />
+                <element signature="e#623#624#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,6 +226,9 @@
         <option value="$PROJECT_DIR$/src/main/LUTRobot.java" />
         <option value="$PROJECT_DIR$/src/main/RobotStates.java" />
         <option value="$PROJECT_DIR$/src/main/NeuralNet.java" />
+        <option value="$PROJECT_DIR$/src/main/ReplayMemory.java" />
+        <option value="$PROJECT_DIR$/src/main/CircularQueue.java" />
+        <option value="$PROJECT_DIR$/src/main/Experience.java" />
       </list>
     </option>
   </component>
@@ -199,8 +241,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -355,16 +397,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22339676" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22339676" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49964765" visible="true" weight="0.27951807" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49964765" weight="0.27951807" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -517,12 +558,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-90">
           <caret line="36" column="74" lean-forward="true" selection-start-line="36" selection-start-column="74" selection-end-line="36" selection-end-column="74" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#429#430#0" expanded="true" />
-            <element signature="e#478#479#0" expanded="true" />
-            <element signature="e#1140#1141#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -540,23 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/LUTRobot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/QLearning.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/EnemyRobot.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -569,6 +587,16 @@
         <state relative-caret-position="-8819" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/LUTRobot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="36" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/LUTInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -576,10 +604,61 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/QLearning.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/NeuralNet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="325" column="83" lean-forward="true" selection-start-line="325" selection-start-column="83" selection-end-line="325" selection-end-column="83" />
+        <state relative-caret-position="318">
+          <caret line="339" column="13" lean-forward="true" selection-start-line="339" selection-start-column="13" selection-end-line="339" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/ReplayMemory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="16" column="25" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#536#537#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#657#658#0" expanded="true" />
+            <element signature="e#695#696#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/CircularQueue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="5" lean-forward="true" selection-start-line="19" selection-start-column="5" selection-end-line="19" selection-end-column="5" />
+          <folding>
+            <element signature="e#169#170#0" expanded="true" />
+            <element signature="e#209#210#0" expanded="true" />
+            <element signature="e#367#368#0" expanded="true" />
+            <element signature="e#405#406#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/Experience.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="1" lean-forward="true" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
+          <folding>
+            <element signature="e#379#380#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+            <element signature="e#445#446#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#551#552#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#623#624#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
