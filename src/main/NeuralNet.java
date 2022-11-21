@@ -347,6 +347,12 @@ public class NeuralNet implements NeuralNetInterface {
         }
     }
 
+    public double scaleRange( double val, double minIn, double maxIn, double minOut, double maxOut){
+        double result;
+        result = minOut + ((maxOut - minOut) * (val - minIn) / (maxIn - minIn));
+        return result;
+    }
+
     public static void main(String[] args) {
         NeuralNet neuralNetBinaryNoMomentum = new NeuralNet(4, false, 0.2, 0,
                 new double[][]{{0,0}, {1,0}, {0,1}, {1,1}}, new double[][]{{0},{1},{1},{0}}, false, 1);
