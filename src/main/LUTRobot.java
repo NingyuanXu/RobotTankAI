@@ -16,7 +16,7 @@ public class LUTRobot extends AdvancedRobot {
 
     // Reinforcement learning part
     private static LUT lut = new LUT(); // same LUT !!
-    private QLearning agent;
+    private static QLearning agent;
 
     // Robot state/action variable, not static
     // Initialize each time for a new robot round
@@ -161,13 +161,13 @@ public class LUTRobot extends AdvancedRobot {
     @Override
     public void onRoundEnded(RoundEndedEvent event) {
         if (roundNumber % 100 == 0) {
-            //writeWinRates();
-            writeTotalRewards();
+            writeWinRates();
+            //writeTotalRewards();
             numWinsPerGroupRound = 0.0;
             totalReward = 0.0;
         }
         roundNumber ++;
-        if (roundNumber % 20000 == 0) {
+        if (roundNumber % 30000 == 0) {
             try {
                 lut.save(getDataFile("LUT.txt"));
             } catch (Exception e) {
@@ -244,7 +244,7 @@ public class LUTRobot extends AdvancedRobot {
     }
 
     private void writeWinRates() {
-        double winRate = numWinsPerGroupRound / 200.0;
+        double winRate = numWinsPerGroupRound / 100.0;
         System.out.println("\n\n" +"win rate"+ " " + winRate + "\n\n");
         File folder = getDataFile("winRate.txt");
         try{
@@ -256,7 +256,6 @@ public class LUTRobot extends AdvancedRobot {
             System.out.println(e);
         }
     }
-
 
     public void writeTotalRewards() {
         File folder = getDataFile("totalRewards.txt");

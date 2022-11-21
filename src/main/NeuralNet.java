@@ -19,6 +19,7 @@ public class NeuralNet implements NeuralNetInterface {
     // Other hyper-parameters
     private double learningRate;
     private double momentum;
+    private int batchSize;
 
     // Model input and expected expectedOutput
     private double[][] input;
@@ -38,7 +39,7 @@ public class NeuralNet implements NeuralNetInterface {
     private static int counterNumExample = 0;
 
     public NeuralNet(int numHidden, boolean isBipolar, double learningRate, double momentum,
-                     double[][] input, double[][] expectedOutput, boolean isPreTrained) {
+                     double[][] input, double[][] expectedOutput, boolean isPreTrained, int batchSize) {
         this.numHidden = numHidden;
         this.isBipolar = isBipolar;
         this.learningRate = learningRate;
@@ -46,7 +47,7 @@ public class NeuralNet implements NeuralNetInterface {
         this.input = input;
         this.expectedOutput = expectedOutput;
         this.isPreTrained = isPreTrained;
-
+        this.batchSize = batchSize;
         this.inputToHiddenWeights = new double[numInput + 1][numHidden];
         this.hiddenToOutputWeights = new double[numHidden + 1][numOutput];
         this.inputToHiddenDelta = new double[numInput + 1][numHidden]; // prev weight changes
@@ -81,13 +82,18 @@ public class NeuralNet implements NeuralNetInterface {
     public double[][] feedForward() {
         // forward from input to hidden layer
         double[] inToHidden = new double[numHidden + 1];
+        int counter = counterNumExample;
         inToHidden[0] = bias;
-        for (int i = 1; i < inToHidden.length; i++) {
-            inToHidden[i] = 0;
-            for (int j = 0; j < inputToHiddenWeights.length; j++) {
-                inToHidden[i] += input[counterNumExample][j] * inputToHiddenWeights[j][i-1];
+        for (int m = 0; m < batchSize; m++) {
+            if (counter >= input.length) break;
+            for (int i = 1; i < inToHidden.length; i++) {
+                inToHidden[i] = 0;
+                for (int j = 0; j < inputToHiddenWeights.length; j++) {
+                    inToHidden[i] += input[counter][j] * inputToHiddenWeights[j][i - 1];
+                }
+                inToHidden[i] = customSigmoid(inToHidden[i]);
             }
-            inToHidden[i] = customSigmoid(inToHidden[i]);
+            counter++;
         }
         // forward from hidden to out layer
         double[] hiddenToOut = new double[numOutput];
@@ -160,6 +166,8 @@ public class NeuralNet implements NeuralNetInterface {
         double[] inToHidden;
         double[] hiddenToOut;
         int endingEpoch = 0;
+        // Add bias term
+        input = appendBiasTerm(input);
         // Initialize the weight at the beginning
         if (isPreTrained) {
             try {
@@ -183,7 +191,7 @@ public class NeuralNet implements NeuralNetInterface {
                 for (int j = 0; j < hiddenToOut.length; j++) {
                     trainingError += Math.pow((hiddenToOut[j] - expectedOutput[counterNumExample][j]), 2);
                 }
-                counterNumExample ++;
+                counterNumExample += batchSize;
             }
             trainingError /= 2; // 1/2 is added just to make derivative simpler, formula
             listOfErrors.add(trainingError);
@@ -201,6 +209,17 @@ public class NeuralNet implements NeuralNetInterface {
         }
         save();
         return endingEpoch;
+    }
+
+    public double[][] appendBiasTerm(double[][] input) {
+        double[][] newInput = new double[input.length][input[0].length + 1];
+        for (int i = 0; i < newInput.length; i++) {
+            newInput[i][0] = bias;
+            for (int j = 1; j < newInput[0].length; j ++) {
+                newInput[i][j] = input[i][j-1];
+            }
+        }
+        return newInput;
     }
 
     public void writeErrorToFile(List<Double> listOfErrors) throws IOException {
@@ -328,41 +347,18 @@ public class NeuralNet implements NeuralNetInterface {
         }
     }
 
-    public int repeatTraining(int num) {
-        int ret = 0;
-        for (int i = 0; i < num; i++) {
-            ret += train(10000);
-        }
-        return ret / num;
-    }
-
     public static void main(String[] args) {
         NeuralNet neuralNetBinaryNoMomentum = new NeuralNet(4, false, 0.2, 0,
-                new double[][]{{bias,0,0}, {bias,1,0}, {bias,0,1}, {bias,1,1}}, new double[][]{{0},{1},{1},{0}}, false);
+                new double[][]{{0,0}, {1,0}, {0,1}, {1,1}}, new double[][]{{0},{1},{1},{0}}, false, 1);
         NeuralNet neuralNetBipolarNoMomentum = new NeuralNet(4, true, 0.2, 0,
-                new double[][]{{bias,-1,-1}, {bias,1,-1}, {bias,-1,1}, {bias,1,1}}, new double[][] {{-1}, {1}, {1}, {-1}}, false);
+                new double[][]{{-1,-1}, {1,-1}, {-1,1}, {1,1}}, new double[][] {{-1}, {1}, {1}, {-1}}, false, 1);
         NeuralNet neuralNetBipolarMomentum = new NeuralNet(4, true, 0.2, 0.9,
-                new double[][]{{bias,-1,-1}, {bias,1,-1}, {bias,-1,1}, {bias,1,1}}, new double[][] {{-1}, {1}, {1}, {-1}}, false);
+                new double[][]{{-1,-1}, {1,-1}, {-1,1}, {1,1}}, new double[][] {{-1}, {1}, {1}, {-1}}, false, 1);
         NeuralNet neuralNetBinaryMomentum = new NeuralNet(4, false, 0.2, 0.9,
-                new double[][]{{bias,0,0}, {bias,1,0}, {bias,0,1}, {bias,1,1}}, new double[][] {{0}, {1}, {1}, {0}}, false);
-        NeuralNet neuralNetBipolarMomentumPreTrained = new NeuralNet(4, true, 0.2, 0.9,
-                new double[][]{{bias,-1,-1}, {bias,1,-1}, {bias,-1,1}, {bias,1,1}}, new double[][] {{-1}, {1}, {1}, {-1}}, true);
-        neuralNetBinaryNoMomentum.train(7000); // give it a large enough number
-        neuralNetBipolarNoMomentum.train(100);
-        neuralNetBipolarMomentum.train(20);
-        neuralNetBinaryMomentum.train(500);
-        System.out.println("The average epoch number to reach less than 0.05 error is : " +neuralNetBinaryNoMomentum.repeatTraining(100));
-        System.out.println("The average epoch number to reach less than 0.05 error is : " +neuralNetBipolarNoMomentum.repeatTraining(100));
-        System.out.println("The average epoch number to reach less than 0.05 error is : " + neuralNetBipolarMomentum.repeatTraining( 100));
-        System.out.println("The average epoch number to reach less than 0.05 error is : " + neuralNetBinaryMomentum.repeatTraining( 100));
-        try {
-            neuralNetBipolarMomentumPreTrained.load();
-            System.out.println(neuralNetBipolarMomentumPreTrained.inputToHiddenWeights[0][1]);
-            System.out.println(neuralNetBipolarMomentumPreTrained.hiddenToOutputWeights[3][0]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        neuralNetBipolarMomentumPreTrained.train(30);
+                new double[][]{{0,0}, {1,0}, {0,1}, {1,1}}, new double[][] {{0}, {1}, {1}, {0}}, false, 1);
+        neuralNetBinaryNoMomentum.train(10000);
+        neuralNetBinaryMomentum.train(10000);
+        neuralNetBipolarNoMomentum.train(10000);
+        neuralNetBipolarMomentum.train(10000);
     }
-
 }

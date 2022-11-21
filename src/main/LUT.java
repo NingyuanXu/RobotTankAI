@@ -9,7 +9,7 @@ public class LUT implements LUTInterface{
 
     static int numStates = RobotStates.numStates;
     static int numActions = RobotActions.numActions;
-    public double[][] lookUpTable;
+    static double[][] lookUpTable;
 
     public LUT() {
         lookUpTable = new double[numStates][numActions];
