@@ -63,6 +63,7 @@ public class LUT implements LUTInterface{
         visited[myHp][enemyHp][enemyDis][wallDis][action] += 1;
     }
 
+    @Override
     public void save(File argFile) {
         PrintStream saveLUT = null;
         try {
@@ -100,6 +101,7 @@ public class LUT implements LUTInterface{
         }
     }
 
+    @Override
     public void load(File argFileName) throws IOException {
         FileInputStream inputFile = new FileInputStream(argFileName);
         BufferedReader inputReader = null;
@@ -134,6 +136,41 @@ public class LUT implements LUTInterface{
         }
     }
 
-    public static void main(String[] args) {
+    public double[][] getLUTTable(){
+        double[][] table = new double[RobotStates.statesCount][RobotStates.Action.values().length];
+        int idx = 0;
+        for (int i = 0; i < lut.length; i++) {
+            for (int j = 0; j < lut[0].length; j++) {
+                for (int k = 0; k < lut[0][0].length; k++) {
+                    for (int l = 0; l < lut[0][0][0].length; l++) {
+                        for (int m = 0; m < lut[0][0][0][0].length; m++) {
+                            table[idx][m] = lut[i][j][k][l][m];
+                        }
+                        idx++;
+                    }
+                }
+            }
+        }
+        return table;
+    }
+
+    public int[] getStates(int dest){
+        int idx = 0;
+        int[] result = new int[4];
+        for (int i = 0; i < lut.length; i++) {
+            for (int j = 0; j < lut[0].length; j++) {
+                for (int k = 0; k < lut[0][0].length; k++) {
+                    for (int l = 0; l < lut[0][0][0].length; l++) {
+                        for (int m = 0; m < lut[0][0][0][0].length; m++) {
+                            if(idx == dest){
+                                result = new int[]{i,j,k,l};
+                            }
+                            idx++;
+                        }
+                    }
+                }
+            }
+        }
+        return result;
     }
 }

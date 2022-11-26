@@ -1,6 +1,6 @@
 package main;
 
-public interface LUTInterface {
+public interface LUTInterface extends CommonInterface {
 
     void initialiseLUT();
 

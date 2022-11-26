@@ -5,15 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="025e7f75-61f4-4fa4-a0bd-305e9646d530" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/CommonInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/CircularQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Experience.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/LUTNeuralNet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/NNRobot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/ReplayMemory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/lut0.3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LUT.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config/robocode.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/robocode.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/window.properties" beforeDir="false" afterPath="$PROJECT_DIR$/config/window.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTRobot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/LUTInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNetInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/NeuralNetInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/RobotTankAI/main/RobotStates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/RobotTankAI/main/RobotStates.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/robots/robot.database" beforeDir="false" afterPath="$PROJECT_DIR$/robots/robot.database" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/CommonInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/CommonInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/LUT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/LUTRobot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUTRobot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/LUTInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LUTInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/LogFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/LogFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RLNeuralNet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/NeuralNetInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/NeuralNetInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/RobotStates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/RobotStates.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +130,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/murlocy/CPEN502/RobotTankAI",
+    "last_opened_file_path": "/Users/murlocy/CPEN502/RobotTankAI/src/main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -131,10 +144,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Robocode">
+  <component name="RunManager" selected="Application.LUTNeuralNet">
     <configuration name="LUT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -150,10 +164,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NeuralNet" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="LUTNeuralNet" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.LUTNeuralNet" />
+      <module name="RobotTankAI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RLNeuralNet" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="12" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="main.NeuralNet" />
+      <option name="MAIN_CLASS_NAME" value="main.RLNeuralNet" />
       <module name="RobotTankAI" />
       <option name="VM_PARAMETERS" value="-DONOSECURITY=TRUE" />
       <extension name="coverage">
@@ -200,16 +227,17 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.RLNeuralNet" />
       <item itemvalue="Application.Robot" />
       <item itemvalue="Application.Robocode" />
-      <item itemvalue="Application.NeuralNet" />
+      <item itemvalue="Application.LUTNeuralNet" />
       <item itemvalue="Application.RobotStates" />
       <item itemvalue="Application.LUT" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.LUTNeuralNet" />
         <item itemvalue="Application.LUT" />
-        <item itemvalue="Application.NeuralNet" />
         <item itemvalue="Application.RobotStates" />
       </list>
     </recent_temporary>

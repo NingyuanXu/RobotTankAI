@@ -1,6 +1,6 @@
 package main;
 
-public interface NeuralNetInterface {
+public interface NeuralNetInterface extends CommonInterface {
 
     final double bias = 1.0; // The input for each neurons bias weight
 
@@ -15,5 +15,4 @@ public interface NeuralNetInterface {
     void backPropagation(double[] outputsHidden, double[] outputs);
 
     int train(int epochNum);
-
 }
