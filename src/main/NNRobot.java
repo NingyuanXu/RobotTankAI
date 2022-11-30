@@ -6,7 +6,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class NNRobot extends AdvancedRobot {
@@ -28,7 +27,7 @@ public class NNRobot extends AdvancedRobot {
     private int actionSize = RobotStates.Action.values().length;
     public double myX = 0.0, myY = 0.0, myHP = 100, enemyHP = 100, dis = 0.0;
     public static boolean takeImmediate = true, onPolicy = true;
-    private double gamma = 0.9, alpha = 0.1, epsilon = 0.0, Q = 0.0, reward = 0.0;
+    private double gamma = 0.9, alpha = 0.1, epsilon = 0.2, Q = 0.0, reward = 0.0;
     private final double immediateBonus = 0.5, terminalBonus = 1.0, immediatePenalty = -0.1, terminalPenalty = -0.2;
 
     public static int curActionIndex;
@@ -41,14 +40,13 @@ public class NNRobot extends AdvancedRobot {
     static LogFile log = new LogFile();
     static int winRateRound = 100;
 
-    public static LUT lut = new LUT();
-    public static boolean isLoad = true, isSave = false;
+    public static boolean isLoad = false, isSave = false;
 
     public static int batchSize = 10;
     public static ReplayMemory<Experience> replayMem = new ReplayMemory<>(batchSize);
 
     //todo: change hyper-params
-    public static RLNeuralNet nn = new RLNeuralNet(12,true,0.05,0.9, false, 1);
+    public static RLNeuralNet nn = new RLNeuralNet(15,true,0.02,0.9, false, 1);
 
     public RobotStates.MyHP getHP(double hp){
         if(hp < 0){
@@ -108,49 +106,20 @@ public class NNRobot extends AdvancedRobot {
         return Math.min(Math.min(x1, dist1), Math.min(x2, dist2));
     }
 
-    public double getQ(double reward, boolean onPolicy){
-        double preQ = lut.getQValue(
-                getHP(preMyHp).ordinal(),
-                getHP(preEnemyHp).ordinal(),
-                getEneDis(preEneDis).ordinal(),
-                getWallDis(preWallDis).ordinal(),
-                preAction.ordinal());
-        double curQ = lut.getQValue(
-                getHP(myHp).ordinal(),
-                getHP(enemyHp).ordinal(),
-                getEneDis(eneDis).ordinal(),
-                getWallDis(wallDis).ordinal(),
-                action.ordinal()
-        );
-        int bestAction = lut.getBestAction(
-                getHP(myHp).ordinal(),
-                getHP(enemyHp).ordinal(),
-                getEneDis(eneDis).ordinal(),
-                getWallDis(wallDis).ordinal()
-        );
-        double maxQ = lut.getQValue(
-                getHP(myHp).ordinal(),
-                getHP(enemyHp).ordinal(),
-                getEneDis(eneDis).ordinal(),
-                getWallDis(wallDis).ordinal(),
-                bestAction
-        );
-        double res = onPolicy ?
-                preQ + alpha * (reward + gamma * curQ - preQ) :
-                preQ + alpha * (reward + gamma * maxQ - preQ);
-        return res;
-    }
-
     public void run() {
-        super.run();
         if(isLoad) {
+            File intoHidd = getDataFile("inputToHiddenWeights.txt");
+            File hiddtoOut = getDataFile("hiddenToOutputWeights.txt");
             try {
-                lut.load(getDataFile(fileToSaveLUT));
-                isLoad = false;
+                nn.load(intoHidd, hiddtoOut);
             } catch (Exception e) {
                 System.out.println(e);
             }
+        } else {
+            nn.initializeWeights();
         }
+        super.run();
+
         setBulletColor(Color.red);
         setGunColor(Color.darkGray);
         setBodyColor(Color.blue);
@@ -164,27 +133,20 @@ public class NNRobot extends AdvancedRobot {
                     break;
                 }
                 case action: {
-                    RobotStates.WallDis wall_state = getWallDis(myX, myY);
                     double[][] scaled = new double[][]{{myHP,enemyHP,eneDis,wallDis}};
-                    scaled = rescaleInput(scaled);
-                    curActionIndex = (Math.random() <= epsilon) ?
-                            lut.getRandomAction() :
-                            nnGetBestAction(scaled[0][0],scaled[0][1],scaled[0][2],scaled[0][3]);
-                    action = RobotStates.Action.values()[curActionIndex];
+                    double[] cur_state = rescaleInput(scaled)[0];
+                    double randn = Math.random();
+                    if(randn > epsilon) {
+                        curActionIndex = (int) nn.getMaxQ(cur_state)[0];
+                        action = RobotStates.Action.values()[curActionIndex];
+                    } else {
+                        action = RobotStates.Action.values()[(int) (Math.random() * RobotStates.Action.values().length)];
+                    }
                     switch (action){
                         case fire: {
                             turnGunRight((getHeading() - getGunHeading() + enemyBearing));
                             fire(3);
                             break;
-                        }
-                        case left: {
-                            setTurnLeft(30);
-                            execute();
-                            break;
-                        }
-                        case right: {
-                            setTurnRight(30);
-                            execute();
                         }
                         case forward: {
                             setAhead(100);
@@ -196,18 +158,21 @@ public class NNRobot extends AdvancedRobot {
                             execute();
                             break;
                         }
+                        case left: {
+                            setTurnLeft(30);
+                            execute();
+                            break;
+                        }
+                        case right: {
+                            setTurnRight(30);
+                            execute();
+                            break;
+                        }
                     }
-                    Q = getQ(reward, onPolicy);
-                    lut.setQValue(getHP(preMyHp).ordinal(),
-                            getHP(preEnemyHp).ordinal(),
-                            getEneDis(preEneDis).ordinal(),
-                            getWallDis(preWallDis).ordinal(),
-                            preAction.ordinal(),
-                            Q
-                    );
+
                     double[] preState = new double[]{preMyHp, preEnemyHp, preEneDis, preWallDis};
                     double[] curState = new double[]{myHP, enemyHP, eneDis, wallDis};
-                    replayMem.add(new Experience(preState, preAction.ordinal(), reward, curState));
+                    replayMem.add(new Experience(preState, preAction.ordinal(), reward, curState, action.ordinal()));
 
                     replayTrain();
                     operation = RobotStates.Operation.scan;
@@ -229,33 +194,13 @@ public class NNRobot extends AdvancedRobot {
     public void replayTrain(){
         int train_size = Math.min(replayMem.sizeOf(), batchSize);
         Object[] vector = replayMem.sample(train_size);
-        ArrayList<double[]> list = new ArrayList<>();
-        ArrayList<double[]> out_list = new ArrayList<>();
         for(Object e: vector){
             Experience exp = (Experience) e;
+            nn.train(exp.getState_t(),exp.getState_t1(),exp.getAction_t(),exp.getAction_t1(), onPolicy, exp.getReward_t());
+        }
+        String intoHidden = "intohidd.txt", hiddentoOut = "hiddtoout.txt";
+        nn.save(getDataFile(intoHidden), getDataFile(hiddentoOut));
 
-            double[] preState = exp.getState_t();
-            double[] preStateAction = Arrays.copyOf(preState, preState.length + 1);
-            preStateAction[preStateAction.length - 1] = exp.getAction_t();
-            list.add(preStateAction);
-            out_list.add(new double[]{lut.getQValue(
-                    getHP(preState[0]).ordinal(),
-                    getHP(preState[1]).ordinal(),
-                    getEneDis(preState[2]).ordinal(),
-                    getWallDis(preState[3]).ordinal(),
-                    exp.getAction_t())});
-        }
-
-        double[][] input = new double[list.size()][list.get(0).length];
-        for(int i = 0; i < list.size(); i++){
-            input[i] = list.get(i);
-        }
-        input = rescaleInput(input);
-        double[][] output = new double[out_list.size()][out_list.get(0).length];
-        for(int i = 0; i < out_list.size(); i++){
-            output[i] = out_list.get(i);
-        }
-        nn.train(1);
     }
 
     public double[][] rescaleInput(double[][] in) {
@@ -274,26 +219,6 @@ public class NNRobot extends AdvancedRobot {
             }
         }
         return out;
-    }
-
-    public int nnGetBestAction(double myHp, double enemyHp ,double enemyDis, double wallDis){
-        double max = -1;
-        int bestAction = -1;
-        for(int i = 0; i < actionSize; i++){
-            double[][] state = new double[][]{{
-                    getHP(myHp).ordinal(),
-                    getHP(enemyHp).ordinal(),
-                    getEneDis(eneDis).ordinal(),
-                    getWallDis(wallDis).ordinal(),
-                    i
-            }};
-            double[] qval = nn.outputQVal(state);
-            if(max < qval[0]){
-                max = qval[0];
-                bestAction = i;
-            }
-        }
-        return bestAction;
     }
 
     // Event handler part
@@ -363,14 +288,10 @@ public class NNRobot extends AdvancedRobot {
     @Override
     public void onWin(WinEvent e){
         reward = terminalBonus;
-        Q = getQ(reward, onPolicy);
-        lut.setQValue(getHP(preMyHp).ordinal(),
-                getHP(preEnemyHp).ordinal(),
-                getEneDis(preEneDis).ordinal(),
-                getWallDis(preWallDis).ordinal(),
-                preAction.ordinal(),
-                Q
-        );
+        double[] preState = new double[]{preMyHp, preEnemyHp, preEneDis, preWallDis};
+        double[] curState = new double[]{myHP, enemyHP, eneDis, wallDis};
+        nn.train(preState,curState,preAction.ordinal(),action.ordinal(),onPolicy,reward);
+
         winRound++;
         totalRound++;
 
@@ -381,26 +302,16 @@ public class NNRobot extends AdvancedRobot {
             log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;
 
-
-            if(totalRound == 4000 && isSave){
-                File argFile = getDataFile(fileToSaveLUT);
-                lut.save(argFile);
-            }
-
         }
     }
 
     @Override
     public void onDeath(DeathEvent e){
         reward = terminalPenalty;
-        Q = getQ(reward, onPolicy);
-        lut.setQValue(getHP(preMyHp).ordinal(),
-                getHP(preEnemyHp).ordinal(),
-                getEneDis(preEneDis).ordinal(),
-                getWallDis(preWallDis).ordinal(),
-                preAction.ordinal(),
-                Q
-        );
+        double[] preState = new double[]{preMyHp, preEnemyHp, preEneDis, preWallDis};
+        double[] curState = new double[]{myHP, enemyHP, eneDis, wallDis};
+        nn.train(preState,curState,preAction.ordinal(),action.ordinal(),onPolicy,reward);
+
         totalRound++;
 
         if((totalRound % winRateRound == 0) && (totalRound != 0)) {
@@ -409,10 +320,6 @@ public class NNRobot extends AdvancedRobot {
             File folderDst1 = getDataFile(fileToSaveName);
             log.writeToFile(folderDst1, winPercentage, round);
             winRound = 0;
-            if(totalRound == 4000 && isSave == true) {
-                File argFile = getDataFile(fileToSaveLUT);
-                lut.save(argFile);
-            }
         }
     }
 

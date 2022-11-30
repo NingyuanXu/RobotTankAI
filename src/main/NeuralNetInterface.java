@@ -10,9 +10,4 @@ public interface NeuralNetInterface extends CommonInterface {
 
     void initializeWeights();
 
-    double[][] feedForward();
-
-    void backPropagation(double[] outputsHidden, double[] outputs);
-
-    int train(int epochNum);
 }

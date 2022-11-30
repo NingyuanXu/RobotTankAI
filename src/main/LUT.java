@@ -63,7 +63,6 @@ public class LUT implements LUTInterface{
         visited[myHp][enemyHp][enemyDis][wallDis][action] += 1;
     }
 
-    @Override
     public void save(File argFile) {
         PrintStream saveLUT = null;
         try {
@@ -101,7 +100,6 @@ public class LUT implements LUTInterface{
         }
     }
 
-    @Override
     public void load(File argFileName) throws IOException {
         FileInputStream inputFile = new FileInputStream(argFileName);
         BufferedReader inputReader = null;

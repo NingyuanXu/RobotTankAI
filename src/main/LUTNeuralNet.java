@@ -122,7 +122,6 @@ public class LUTNeuralNet implements NeuralNetInterface  {
         writer.close();
     }
 
-    @Override
     public double[][] feedForward() {
         // forward from input to hidden layer
         double[] inToHidden = new double[numHidden + 1];
@@ -151,7 +150,6 @@ public class LUTNeuralNet implements NeuralNetInterface  {
         return new double[][]{inToHidden, hiddenToOut};
     }
 
-    @Override
     public void backPropagation(double[] inToHidden, double[] hiddenToOut) {
         double[] errorSignalHidden;
         double[] errorSignalOutput;
@@ -203,7 +201,6 @@ public class LUTNeuralNet implements NeuralNetInterface  {
         return errorSignalOutput;
     }
 
-    @Override
     public int train(int epochNum) {
         double trainingError;
         List<Double> listOfErrors = new ArrayList<>();
@@ -237,8 +234,8 @@ public class LUTNeuralNet implements NeuralNetInterface  {
                 }
                 counterNumExample += batchSize;
             }
-            trainingError /= 2; // 1/2 is added just to make derivative simpler, formula
-            //trainingError = Math.sqrt(trainingError / input.length);
+            //trainingError /= 2; // 1/2 is added just to make derivative simpler, formula
+            trainingError = Math.sqrt(trainingError / input.length);
             listOfErrors.add(trainingError);
             if (trainingError < 0.05) {
                 System.out.println("Reach total error less than 0.05 in epoch: " + i);
@@ -268,7 +265,6 @@ public class LUTNeuralNet implements NeuralNetInterface  {
         return newInput;
     }
 
-    @Override
     public void save(File argFile) {
         StringBuilder builder1 = new StringBuilder();
         for(int i = 0; i < inputToHiddenWeights.length; i++)
@@ -330,7 +326,6 @@ public class LUTNeuralNet implements NeuralNetInterface  {
         }
     }
 
-    @Override
     public void load(File argFile) throws IOException {
         BufferedReader reader1 = null;
         try {
@@ -390,44 +385,23 @@ public class LUTNeuralNet implements NeuralNetInterface  {
     }
     public static double[][] normalizeOutputs(double[][] initialOutputs,double lowerBound, double upperBound) {
         double[][] normOutputs = new double[RobotStates.statesCount][RobotStates.Action.values().length];
-        double[] maxQ = new double[RobotStates.Action.values().length]; //maximum Q value for each action
-        double[] minQ = new double[RobotStates.Action.values().length]; //minimum Q value for each action
+        double maxQ = Integer.MIN_VALUE;
+        double minQ = Integer.MAX_VALUE;
 
-        for (int actionID = 0; actionID < RobotStates.Action.values().length; actionID++) {
-            maxQ[actionID] = findMax(getColumn(initialOutputs,actionID));
-            minQ[actionID] = findMin(getColumn(initialOutputs,actionID));
-        }
-
-        for (int i = 0; i < RobotStates.statesCount; i++) {
-            for (int j = 0; j < RobotStates.Action.values().length; j++) {
-                normOutputs[i][j] = scaleRange(initialOutputs[i][j],minQ[j],maxQ[j],lowerBound,upperBound);
+        for(int i = 0; i < initialOutputs.length; i++){
+            for(int j = 0; j < initialOutputs[0].length;j++){
+                maxQ = Math.max(initialOutputs[i][j], maxQ);
+                minQ = Math.min(initialOutputs[i][j], minQ);
             }
         }
+
+        for(int i = 0; i < initialOutputs.length; i++){
+            for(int j = 0; j < initialOutputs[0].length;j++){
+                normOutputs[i][j] = scaleRange(initialOutputs[i][j],minQ,maxQ,-1,1);
+            }
+        }
+
         return normOutputs;
-    }
-
-    public static double findMax(double[] Array) {
-        double max = Double.NEGATIVE_INFINITY;
-        for (double v : Array) {
-            max = Math.max(v, max);
-        }
-        return max;
-    }
-
-    public static double findMin(double[] Array) {
-        double min = Double.POSITIVE_INFINITY;
-        for (double v : Array) {
-            min = Math.min(v, min);
-        }
-        return min;
-    }
-
-    public static double[] getColumn(double[][] array, int columnIndex) {
-        double[] column = new double[RobotStates.statesCount];
-        for(int i = 0; i< column.length; i++ ) {
-            column[i] = array[i][columnIndex];
-        }
-        return column;
     }
 
     public static void printInputs(double[][] inputs){
@@ -513,9 +487,9 @@ public class LUTNeuralNet implements NeuralNetInterface  {
         }
 
 
-        inputs = randomizeMatrix(inputs);
+        //inputs = randomizeMatrix(inputs);
         printInputs(inputs);
-        LUTNeuralNet nn = new LUTNeuralNet(15,true,0.03,0.7,inputs,expectedOutputs,false,1);
+        LUTNeuralNet nn = new LUTNeuralNet(15,true,0.02,0.9,inputs,expectedOutputs,false,1);
         nn.train(5000);
     }
 

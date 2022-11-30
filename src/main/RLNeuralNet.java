@@ -1,5 +1,7 @@
 package main;
 
+import robocode.RobocodeFileWriter;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +38,8 @@ public class RLNeuralNet implements NeuralNetInterface  {
     private static double maxWeight = 0.5;
 
     // Use that to count the current example
-    private static int counterNumExample = 0;
     static LogFile log = new LogFile();
+    private static double discountFactor = 0.1;
 
     public RLNeuralNet(int numHidden, boolean isBipolar, double learningRate, double momentum,
                        double[][] input, double[][] expectedOutput, boolean isPreTrained, int batchSize) {
@@ -91,39 +93,6 @@ public class RLNeuralNet implements NeuralNetInterface  {
         }
     }
 
-    public double[] outputQVal(double[][] newInput) {
-        // forward from input to hidden layer
-        input = appendBiasTerm(newInput);
-        return outputHelper()[1];
-    }
-
-    private double[][] outputHelper() {
-        // forward from input to hidden layer
-        double[] inToHidden = new double[numHidden + 1];
-        int counter = 0;
-        inToHidden[0] = bias;
-        for (int m = 0; m < batchSize; m++) {
-            if (counter >= input.length) break;
-            for (int i = 1; i < inToHidden.length; i++) {
-                inToHidden[i] = 0;
-                for (int j = 0; j < inputToHiddenWeights.length; j++) {
-                    inToHidden[i] += input[counter][j] * inputToHiddenWeights[j][i - 1];
-                }
-                inToHidden[i] = customSigmoid(inToHidden[i]);
-            }
-            counter++;
-        }
-        // forward from hidden to out layer
-        double[] hiddenToOut = new double[numOutput];
-        for (int i = 0; i < hiddenToOut.length; i++) {
-            hiddenToOut[i] = 0;
-            for (int j = 0; j < hiddenToOutputWeights.length; j++) {
-                hiddenToOut[i] += inToHidden[j] * hiddenToOutputWeights[j][i];
-            }
-            hiddenToOut[i] = customSigmoid(hiddenToOut[i]);
-        }
-        return new double[][]{inToHidden, hiddenToOut};
-    }
 
     public void writeErrorToFile(List<Double> listOfErrors) throws IOException {
         String s = isBipolar ? "bipolar_" + String.valueOf(momentum) +  ".csv" : "binary_" + String.valueOf(momentum) +  ".csv";
@@ -135,25 +104,22 @@ public class RLNeuralNet implements NeuralNetInterface  {
         writer.close();
     }
 
-    @Override
-    public double[][] feedForward() {
+    public double[][] feedForward(double[] state, int action) {
         // forward from input to hidden layer
+        //todo:change state t
         double[] inToHidden = new double[numHidden + 1];
-        int counter = counterNumExample;
-        inToHidden[0] = bias;
-        for (int m = 0; m < batchSize; m++) {
-            if (counter >= input.length) break;
-            for (int i = 1; i < inToHidden.length; i++) {
-                inToHidden[i] = 0;
-                for (int j = 0; j < inputToHiddenWeights.length; j++) {
-                    inToHidden[i] += input[counter][j] * inputToHiddenWeights[j][i - 1];
-                }
-                inToHidden[i] = customSigmoid(inToHidden[i]);
-            }
-            counter++;
-        }
-        // forward from hidden to out layer
         double[] hiddenToOut = new double[numOutput];
+        inToHidden[0] = bias;
+
+        for (int i = 1; i < inToHidden.length; i++) {
+            inToHidden[i] = 0;
+            for (int j = 0; j < inputToHiddenWeights.length; j++) {
+                inToHidden[i] += adjustInputs(state)[action][j] * inputToHiddenWeights[j][i - 1];
+            }
+            inToHidden[i] = customSigmoid(inToHidden[i]);
+        }
+
+        // forward from hidden to out layer
         for (int i = 0; i < hiddenToOut.length; i++) {
             hiddenToOut[i] = 0;
             for (int j = 0; j < hiddenToOutputWeights.length; j++) {
@@ -164,12 +130,11 @@ public class RLNeuralNet implements NeuralNetInterface  {
         return new double[][]{inToHidden, hiddenToOut};
     }
 
-    @Override
-    public void backPropagation(double[] inToHidden, double[] hiddenToOut) {
+    public void backPropagation(double[] inToHidden, double[] hiddenToOut, double[] state, int action, double Q) {
         double[] errorSignalHidden;
         double[] errorSignalOutput;
         // Compute output error signal
-        errorSignalOutput = computeErrorSignalOutput(hiddenToOut);
+        errorSignalOutput = computeErrorSignalOutput(hiddenToOut, Q);
         // update weights hiddenToOut
         for (int i = 0; i < hiddenToOutputWeights.length; i++) {
             for (int j = 0; j < hiddenToOutputWeights[0].length; j++) {
@@ -181,7 +146,7 @@ public class RLNeuralNet implements NeuralNetInterface  {
         // update weights inToHidden
         for (int i = 0; i < inputToHiddenWeights.length; i++) {
             for (int j = 1; j < inputToHiddenWeights[0].length; j++) {
-                inputToHiddenDelta[i][j-1] = momentum * inputToHiddenDelta[i][j-1] + learningRate * input[counterNumExample][i] * errorSignalHidden[j];
+                inputToHiddenDelta[i][j-1] = momentum * inputToHiddenDelta[i][j-1] + learningRate * adjustInputs(state)[action][i] * errorSignalHidden[j];
                 inputToHiddenWeights[i][j-1] += inputToHiddenDelta[i][j-1];
             }
         }
@@ -202,69 +167,36 @@ public class RLNeuralNet implements NeuralNetInterface  {
         return errorSignalHidden;
     }
 
-    private double[] computeErrorSignalOutput(double[] hiddenToOut) {
+    private double[] computeErrorSignalOutput(double[] hiddenToOut, double Q) {
         double[] errorSignalOutput = new double[numOutput];
         if (isBipolar) {
             for (int i = 0; i < hiddenToOut.length; i++) {
-                errorSignalOutput[i] = (1 - hiddenToOut[i] * hiddenToOut[i]) * (expectedOutput[counterNumExample][i] - hiddenToOut[i]) * 0.5;
+                errorSignalOutput[i] = (1 - hiddenToOut[i] * hiddenToOut[i]) * (Q - hiddenToOut[i]) * 0.5;
             }
         } else {
             for (int i = 0; i < hiddenToOut.length; i++) {
-                errorSignalOutput[i] = hiddenToOut[i] * (1 - hiddenToOut[i]) * (expectedOutput[counterNumExample][i] - hiddenToOut[i]);
+                errorSignalOutput[i] = hiddenToOut[i] * (1 - hiddenToOut[i]) * (Q - hiddenToOut[i]);
             }
         }
         return errorSignalOutput;
     }
 
-    @Override
-    public int train(int epochNum) {
-        double trainingError;
-        List<Double> listOfErrors = new ArrayList<>();
+    public void train(double[] preState, double[] curState, int preAction, int curAction, boolean onPolicy, double reward) {
         double[] inToHidden;
         double[] hiddenToOut;
-        int endingEpoch = 0;
         // Add bias term
-        input = appendBiasTerm(input);
-        // Initialize the weight at the beginning
-//        if (isPreTrained) {
-//            try {
-//                load();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-        initializeWeights();
-        //}
-        for (int i = 0; i < epochNum; i++) {
-            // Every new epoch, re-initialize
-            counterNumExample = 0;
-            trainingError = 0.0;
-            // Repeat checking each example in the dataset
-            while (counterNumExample < input.length) {
-                inToHidden = feedForward()[0];
-                hiddenToOut = feedForward()[1];
-                backPropagation(inToHidden, hiddenToOut);
-                // Compute the errors here
-                for (int j = 0; j < hiddenToOut.length; j++) {
-                    trainingError += Math.pow((hiddenToOut[j] - expectedOutput[counterNumExample][j]), 2);
-                }
-                counterNumExample += batchSize;
-            }
-            trainingError /= 2; // 1/2 is added just to make derivative simpler, formula
-            listOfErrors.add(trainingError);
-            if (trainingError < 0.05) {
-                System.out.println("Reach total error less than 0.05 in epoch: " + i);
-                endingEpoch = i;
-                break;
-            }
+        double newQ = 0.0, Q;
+
+        inToHidden = feedForward(preState,preAction)[0];
+        hiddenToOut = feedForward(preState,preAction)[1];
+
+        Q = hiddenToOut[numOutput-1];
+        if(onPolicy){
+            newQ = Q + learningRate * (reward + discountFactor * feedForward(preState,preAction)[1][numOutput-1] - Q);
+        } else {
+            newQ = Q + learningRate * (reward + discountFactor * getMaxQ(curState)[1] - Q);
         }
-        // Save the results
-//        try {
-//            writeErrorToFile(listOfErrors);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        return endingEpoch;
+        backPropagation(inToHidden, hiddenToOut, preState, preAction, newQ);
     }
 
     public double[][] appendBiasTerm(double[][] input) {
@@ -278,10 +210,85 @@ public class RLNeuralNet implements NeuralNetInterface  {
         return newInput;
     }
 
+    public double[][] adjustInputs(double[] state) {
+        //Normalize actions to range [-1,1]
+        double[] normalizedActions = new double[RobotStates.Action.values().length];
+        for (int i = 0; i < RobotStates.Action.values().length; i++) {
+            normalizedActions[i] = scaleRange(i,0,RobotStates.Action.values().length-1, -1,1);
+        }
+
+        double[][] inputs = new double[RobotStates.Action.values().length][numInput + 1];
+        for (int j = 0; j < RobotStates.Action.values().length; j++) {
+            double[] normalizedStates = normalizeStatesInputs(state,-1,1); //Normalize states inputs
+            inputs[j][0] = bias;
+
+            for (int k = 1; k < numInput - 1; k++) {
+                inputs[j][k] = normalizedStates[k];
+            }
+            switch (j % RobotStates.Action.values().length) {
+                case 0:
+                    inputs[j][numInput-1] = normalizedActions[0];
+                    break;
+                case 1:
+                    inputs[j][numInput-1] = normalizedActions[1];
+                    break;
+                case 2:
+                    inputs[j][numInput-1] = normalizedActions[2];
+                    break;
+                case 3:
+                    inputs[j][numInput-1] = normalizedActions[3];
+                    break;
+            }
+        }
+        return inputs;
+    }
+
+    public static double[] normalizeStatesInputs(double[] statesInputs, double lowerBound, double upperBound) {
+        double[] normalizedStates = new double[4];
+        for(int i = 0; i < 4; i++) {
+            switch (i) {
+                case 0:
+                    normalizedStates[0] = scaleRange(statesInputs[0],0,100,lowerBound,upperBound);
+                    break;
+                case 1:
+                    normalizedStates[1] = scaleRange(statesInputs[1],0,100,lowerBound,upperBound);
+                    break;
+                case 2:
+                    normalizedStates[2] = scaleRange(statesInputs[2],0,1000,lowerBound,upperBound);
+                    break;
+                case 3:
+                    normalizedStates[3] = scaleRange(statesInputs[3],0,300,lowerBound,upperBound);
+                    break;
+            }
+        }
+        return normalizedStates;
+    }
+
+    public static double scaleRange(double val, double minIn, double maxIn, double minOut, double maxOut){
+        double result;
+        result = minOut + ((maxOut - minOut) * (val - minIn) / (maxIn - minIn));
+        return result;
+    }
+
+    public double[] getMaxQ(double[] state){
+        double maxQ = Double.MIN_VALUE;
+        int bestAction = 0;
+        double[] result = new double[2];
+        for(int i = 0; i < RobotStates.Action.values().length; i++){
+            double cur = feedForward(state,i)[1][numOutput-1];
+            if(cur >= maxQ){
+                maxQ = cur;
+                bestAction = i;
+            }
+        }
+        result[0] = (double) bestAction;
+        result[1] = maxQ;
+        return result;
+    }
 
 
-    @Override
-    public void save(File argFile) {
+
+    public void save(File inToHidden, File hiddToOut) {
         StringBuilder builder1 = new StringBuilder();
         for(int i = 0; i < inputToHiddenWeights.length; i++)
         {
@@ -294,9 +301,9 @@ public class RLNeuralNet implements NeuralNetInterface  {
             //append new line at the end of the row
             builder1.append("\n");
         }
-        BufferedWriter writer1 = null;
+        RobocodeFileWriter writer1 = null;
         try {
-            writer1 = new BufferedWriter(new FileWriter("inputToHiddenWeights.txt"));
+            writer1 = new RobocodeFileWriter(inToHidden);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -323,9 +330,9 @@ public class RLNeuralNet implements NeuralNetInterface  {
             //append new line at the end of the row
             builder2.append("\n");
         }
-        BufferedWriter writer2 = null;
+        RobocodeFileWriter writer2 = null;
         try {
-            writer2 = new BufferedWriter(new FileWriter("hiddenToOutputWeights.txt"));
+            writer2 = new RobocodeFileWriter(hiddToOut);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -342,11 +349,10 @@ public class RLNeuralNet implements NeuralNetInterface  {
         }
     }
 
-    @Override
-    public void load(File argFile) throws IOException {
+    public void load(File intoHidd, File hiddtoOut) throws IOException {
         BufferedReader reader1 = null;
         try {
-            reader1 = new BufferedReader(new FileReader("inputToHiddenWeights.txt"));
+            reader1 = new BufferedReader(new FileReader(intoHidd));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -371,7 +377,7 @@ public class RLNeuralNet implements NeuralNetInterface  {
         }
         BufferedReader reader2 = null;
         try {
-            reader2 = new BufferedReader(new FileReader("hiddenToOutputWeights.txt"));
+            reader2 = new BufferedReader(new FileReader(hiddtoOut));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -395,9 +401,4 @@ public class RLNeuralNet implements NeuralNetInterface  {
         }
     }
 
-    public static double scaleRange( double val, double minIn, double maxIn, double minOut, double maxOut){
-        double result;
-        result = minOut + ((maxOut - minOut) * (val - minIn) / (maxIn - minIn));
-        return result;
-    }
 }

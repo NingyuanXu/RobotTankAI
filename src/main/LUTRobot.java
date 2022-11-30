@@ -24,7 +24,7 @@ public class LUTRobot extends AdvancedRobot {
 
     public double myX = 0.0, myY = 0.0, myHP = 100, enemyHP = 100, dis = 0.0;
     public static boolean takeImmediate = true, onPolicy = true;
-    private double gamma = 0.9, alpha = 0.1, epsilon = 0.0, Q = 0.0, reward = 0.0;
+    private double gamma = 0.9, alpha = 0.1, epsilon = 0.3, Q = 0.0, reward = 0.0;
     private final double immediateBonus = 0.5, terminalBonus = 1.0, immediatePenalty = -0.1, terminalPenalty = -0.2;
 
     public static int curActionIndex;
@@ -33,7 +33,7 @@ public class LUTRobot extends AdvancedRobot {
     public static int totalRound = 0, round = 0, winRound = 0;
     public static double winPercentage = 0.0;
     public static String fileToSaveName = LUTRobot.class.getSimpleName() + "-" + "winningRate" + ".log";
-    public static String fileToSaveLUT = "lut1.0.txt";
+    public static String fileToSaveLUT = "lut0.3.txt";
     static LogFile log = new LogFile();
     static int winRateRound = 100;
 
@@ -152,15 +152,6 @@ public class LUTRobot extends AdvancedRobot {
                             fire(3);
                             break;
                         }
-                        case left: {
-                            setTurnLeft(30);
-                            execute();
-                            break;
-                        }
-                        case right: {
-                            setTurnRight(30);
-                            execute();
-                        }
                         case forward: {
                             setAhead(100);
                             execute();
@@ -171,6 +162,16 @@ public class LUTRobot extends AdvancedRobot {
                             execute();
                             break;
                         }
+                        case left: {
+                            setTurnLeft(30);
+                            execute();
+                            break;
+                        }
+                        case right: {
+                            setTurnRight(30);
+                            execute();
+                        }
+
                     }
                     Q = getQ(reward, onPolicy);
                     lut.setQValue(preMyHp.ordinal(),

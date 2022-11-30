@@ -7,11 +7,14 @@ public class Experience {
     private double reward_t;
     private double[] state_t1;
 
-    public Experience(double[] st, int at, double rt, double[] st1){
+    private int action_t1;
+
+    public Experience(double[] st, int at, double rt, double[] st1, int at1){
         this.state_t = st;
         this.action_t = at;
         this.reward_t = rt;
         this.state_t1 = st1;
+        this.action_t1 = at1;
     }
 
     public double[] getState_t(){
@@ -28,5 +31,8 @@ public class Experience {
 
     public double[] getState_t1(){
         return this.state_t1;
+    }
+    public int getAction_t1(){
+        return this.action_t1;
     }
 }
